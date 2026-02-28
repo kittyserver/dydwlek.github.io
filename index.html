@@ -18,7 +18,7 @@ body{
     #0b0f1a;
 }
 
-/* ===== 인트로 (깨짐 없는 contain + SKIP 정상) ===== */
+/* ===== 인트로 (2초 자동 스킵 + 로딩바) ===== */
 .intro{
   position:fixed;
   inset:0;
@@ -28,7 +28,6 @@ body{
 }
 .intro.show{ display:block; }
 
-/* ✔ 이미지 확대 없이 전체 표시 */
 .intro::before{
   content:"";
   position:absolute;
@@ -36,19 +35,14 @@ body{
   background:#000 url('intro.jpg.png') center/contain no-repeat;
   pointer-events:none; /* 클릭 가로채기 방지 */
 }
-
-/* ✔ 어둡게 집중도 */
 .intro::after{
   content:"";
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at center,
-      rgba(0,0,0,0.25),
-      rgba(0,0,0,0.85));
+  background:radial-gradient(circle at center, rgba(0,0,0,0.25), rgba(0,0,0,0.88));
   pointer-events:none;
 }
 
-/* 가운데 */
 .intro-center{
   position:absolute;
   inset:0;
@@ -59,6 +53,7 @@ body{
   gap:14px;
   text-align:center;
   z-index:2;
+  padding:24px;
 }
 
 .intro-title{
@@ -66,35 +61,47 @@ body{
   letter-spacing:.6px;
   font-size:22px;
   text-shadow:0 8px 24px rgba(0,0,0,.7);
+  user-select:none;
 }
 
-/* ✔ SKIP 버튼 */
-.intro-skip{
-  position:relative;
-  z-index:3;
-  cursor:pointer;
-  padding:12px 22px;
+/* 로딩바 */
+.loader{
+  width:min(320px, 76vw);
+  height:10px;
   border-radius:999px;
-  font-weight:900;
-  border:1px solid rgba(255,255,255,.25);
-  background:rgba(10,12,18,.55);
-  color:#fff;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(10,12,18,.45);
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-.intro-skip:hover{
-  transform:translateY(-1px);
-  background:rgba(20,24,40,.65);
+.loader > span{
+  display:block;
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ffd86b,#ffb700);
+  animation:loadFill 2s linear forwards;
+}
+@keyframes loadFill{
+  to{ width:100%; }
 }
 
-/* 페이드 */
+/* 안내 텍스트 */
+.hint{
+  font-size:12px;
+  color:rgba(233,238,252,.85);
+  opacity:.9;
+  user-select:none;
+}
+
+/* 닫힐 때 */
 .fade-out{ animation:fadeOut .35s ease forwards; }
 @keyframes fadeOut{ to{ opacity:0; visibility:hidden; } }
 
 /* ===== 메인 ===== */
 .wrap{max-width:960px;margin:0 auto;padding:28px}
-
 .card{
   background:#121a2b;
   border:1px solid #22304f;
@@ -102,8 +109,6 @@ body{
   padding:22px;
   box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
-
-/* 배너 */
 .banner-wrap{
   position:relative;
   overflow:hidden;
@@ -112,119 +117,126 @@ body{
   border:1px solid #22304f;
 }
 .banner-img{width:100%;display:block;}
-
 .banner-shine{
-  position:absolute;
-  top:0;
-  left:-40%;
-  width:40%;
-  height:100%;
-  background:linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.35) 50%,
-    rgba(255,255,255,0) 100%
-  );
+  position:absolute;top:0;left:-40%;width:40%;height:100%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
   transform:skewX(-20deg);
   animation:shineMove 3.5s infinite;
   pointer-events:none;
 }
 @keyframes shineMove{0%{left:-40%}100%{left:140%}}
 
-/* 카드 */
 .box{
-  background:#0f1626;
-  border:1px solid #22304f;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:14px;
+  background:#0f1626;border:1px solid #22304f;border-radius:14px;
+  padding:16px;margin-bottom:14px;
 }
 h2{margin:0 0 8px}
 .list{margin:0;padding-left:18px}
-
 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 a.btn{
-  padding:10px 14px;
-  border-radius:12px;
-  text-decoration:none;
-  color:#e9eefc;
-  border:1px solid #3a4f7a;
+  padding:10px 14px;border-radius:12px;text-decoration:none;color:#e9eefc;border:1px solid #3a4f7a;
 }
 a.btn:hover{background:#1b2a44}
-
 .footer{margin-top:18px;color:#93a4c7;font-size:12px}
-
-@media (max-width:520px){
-  .wrap{padding:18px}
-}
+@media (max-width:520px){ .wrap{padding:18px} }
 </style>
 </head>
 
 <body>
 
-<!-- 인트로 -->
+<!-- ✅ 인트로 (2초 자동) -->
 <div id="intro" class="intro">
   <div class="intro-center">
     <div class="intro-title">키티서버</div>
-    <button class="intro-skip" id="skipBtn">SKIP</button>
+    <div class="loader" aria-label="loading"><span></span></div>
+    <div class="hint">2초 후 자동 입장 · 화면 아무 곳이나 누르면 즉시 입장</div>
   </div>
 </div>
 
-<!-- 메인 -->
+<!-- ✅ 메인 -->
 <div class="wrap">
-<div class="card">
+  <div class="card">
 
-<div class="banner-wrap">
-  <img src="banner_glow_open_fix.jpg" class="banner-img">
-  <div class="banner-shine"></div>
-</div>
+    <div class="banner-wrap">
+      <img src="banner_glow_open_fix.jpg" class="banner-img" alt="키티서버 배너">
+      <div class="banner-shine"></div>
+    </div>
 
-<div class="box">
-<h2>📢 공지</h2>
-<ul class="list">
-<li>3월 1일 ~ 8일 2차 오픈</li>
-<li>디스코드 및 단톡 참여 후 접속</li>
-<li>오대기: 3월 1일 18시~20시</li>
-</ul>
-</div>
+    <div class="box">
+      <h2>📢 공지</h2>
+      <ul class="list">
+        <li>3월 1일 ~ 8일 2차 오픈</li>
+        <li>디스코드 및 단톡 참여 후 접속</li>
+        <li>오대기: 3월 1일 18시~20시</li>
+      </ul>
+    </div>
 
-<div class="box">
-<h2>⬇️ 다운로드</h2>
-<div class="btns">
-<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">접속기 다운로드</a>
-</div>
-</div>
+    <div class="box">
+      <h2>⬇️ 다운로드</h2>
+      <div class="btns">
+        <a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank" rel="noopener">접속기 다운로드</a>
+      </div>
+    </div>
 
-<div class="box">
-<h2>💬 커뮤니티</h2>
-<div class="btns">
-<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
-<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
-<a class="btn" href="https://t.me/kitty20262026" target="_blank">Telegram</a>
-</div>
-</div>
+    <div class="box">
+      <h2>💬 커뮤니티</h2>
+      <div class="btns">
+        <a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank" rel="noopener">Discord</a>
+        <a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank" rel="noopener">카카오 단톡</a>
+        <a class="btn" href="https://t.me/kitty20262026" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
 
-<div class="footer">© 키티서버</div>
-
-</div>
+    <div class="footer">© 키티서버</div>
+  </div>
 </div>
 
 <script>
+/* ===== 인트로 제어 ===== */
 const intro = document.getElementById('intro');
-const skipBtn = document.getElementById('skipBtn');
+
+/* 사운드: 브라우저 정책상 자동재생이 막힐 수 있음.
+   - 가능한 경우: 자동 재생
+   - 막히면: 유저가 화면을 한번 터치/클릭할 때 재생 시도 */
+let audio = null;
+try{
+  audio = new Audio('intro.mp3'); // ✅ intro.mp3 파일 업로드 필요
+  audio.volume = 0.6;
+} catch(e){ audio = null; }
+
+function tryPlayAudio(){
+  if(!audio) return;
+  const p = audio.play();
+  if(p && typeof p.catch === 'function'){
+    p.catch(()=>{/* 자동재생 막혀도 조용히 무시 */});
+  }
+}
 
 function closeIntro(){
+  if(!document.getElementById('intro')) return;
   intro.classList.add('fade-out');
+  if(audio){
+    try{ audio.pause(); audio.currentTime = 0; }catch(e){}
+  }
   setTimeout(()=> intro.remove(), 400);
 }
 
-/* 매번 인트로 표시 */
+/* ✅ 매번 인트로 표시 */
 intro.classList.add('show');
+tryPlayAudio();
 
-skipBtn.addEventListener('click', closeIntro);
+/* ✅ 2초 후 자동 스킵 */
+const timer = setTimeout(closeIntro, 2000);
 
+/* ✅ 화면 아무데나 누르면 즉시 입장 + (자동재생 막힌 경우) 사운드도 이때 시도 */
+function instantEnter(){
+  clearTimeout(timer);
+  tryPlayAudio();
+  closeIntro();
+}
+intro.addEventListener('click', instantEnter, {passive:true});
 window.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape' && document.getElementById('intro')) closeIntro();
+  if(e.key === 'Escape') instantEnter();
 });
 </script>
 
