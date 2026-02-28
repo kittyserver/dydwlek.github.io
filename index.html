@@ -1,134 +1,85 @@
-<style>
+<!-- =========================
+   KITTY 통합 패치 FULL
+   - 왕관 → KITTY 아이콘
+   - 고객센터 KITTY 배너
+   - 디스코드/카톡/텔레/다운로드 버튼
+========================= -->
 
-/* ===== KITTY HUB ===== */
-.kitty-hub{
-  max-width:1200px;
-  margin:10px auto 0;
-  padding:0 10px;
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-  flex-wrap:wrap;
+<style>
+/* 왕관 아이콘 → KITTY */
+.label{
+  background:url(https://t1.daumcdn.net/cfile/tistory/998C7A3E5E1E7C7A2F) center/contain no-repeat !important;
 }
 
-.kitty-hub a{
-  display:inline-flex;
+/* 우측 고정 SNS 버튼 */
+.kitty-fixed{
+  position:fixed;
+  right:15px;
+  bottom:90px;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.kitty-fixed a{
+  display:flex;
   align-items:center;
-  justify-content:center;
-  height:40px;
-  padding:0 14px;
-  border:1px solid rgba(255,255,255,0.18);
-  background:rgba(0,0,0,0.35);
-  color:#ffdd99 !important;
-  border-radius:10px;
-  font-weight:700;
-  font-size:14px;
-  text-decoration:none !important;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:8px;
+  background:rgba(0,0,0,.85);
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+  border:1px solid rgba(255,255,255,.15);
   transition:.2s;
 }
 
-.kitty-hub a:hover{
-  transform:translateY(-1px);
-  background:rgba(0,0,0,0.55);
-  border-color:rgba(255,221,153,0.35);
+.kitty-fixed a:hover{
+  background:#c69c7c;
 }
 
-@media (max-width:768px){
-  .kitty-hub{justify-content:center;}
-  .kitty-hub a{flex:1; min-width:140px;}
+.kitty-fixed img{
+  width:18px;
+  height:18px;
 }
-
-/* ===== 상단 다운로드 버튼 ===== */
-.submit-video a.kitty-download{
-  display:block;
-  width:190px;
-  height:58px;
-  text-indent:-9999px;
-  background-image:url(https://assets.playnccdn.com/uikit/cnb/3.2.0/img/download/journey/btn-download-ko.png);
-  background-repeat:no-repeat;
-  background-position:50%;
-  background-size:190px 58px;
-}
-.submit-video a.kitty-download:hover{
-  background-image:url(https://assets.playnccdn.com/uikit/cnb/3.2.0/img/download/journey/btn-download-hover-ko.png);
-}
-
 </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', function(){
 
-<!-- ================= HEADER ================= -->
-<div class='headertop-wrap'>
-<div class='header-container'>
+  /* 고객센터 KITTY 교체 */
+  var csWrap = document.querySelector('.cs1');
+  if(csWrap){
+    var img = csWrap.querySelector('img');
+    if(img){
+      img.src="https://i.imgur.com/4M7IWwP.png";
+      img.alt="KITTY 고객센터";
+    }
+    var txt = csWrap.querySelector('.error_1');
+    if(txt) txt.textContent="KITTY 고객센터";
+  }
 
-<div class='headerwrap'>
-<div class='header section'>
+  /* 우측 SNS 버튼 생성 */
+  var box=document.createElement('div');
+  box.className='kitty-fixed';
+  box.innerHTML=`
+    <a href="https://discord.gg/ecBhq6Y9" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"> 디스코드
+    </a>
+    <a href="https://open.kakao.com/o/g7MGDzdi" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png"> 카카오톡
+    </a>
+    <a href="https://t.me/kitty20262026" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> 텔레그램
+    </a>
+    <a href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png"> 다운로드
+    </a>
+  `;
+  document.body.appendChild(box);
 
-<a href='/' style='display:block'>
-<img src='https://blogger.googleusercontent.com/img/a/AVvXsEjXYSDIL1S2lSd4H7JdsRrvGrd-R88HpCrmvpDxWJbDpBGTthGOeVo7pgTvkYSXAn-gyoFBZ1SICEbH_trjlKj7BiYEFR4AH2hIu17QluiOLRp6wSt2fpfyEsQ0qbgAeqow4ZPnvuUr7jwNhpW845M_OLvJx1jwQojGA-p2TTQYxrNP4FxfgDG0fyrivN3s=s232'
-style='height:64px'>
-</a>
-
-</div>
-</div>
-
-<div class='topbar'>
-<ul class='topmenu1 megamenu megamenuid'>
-
-<li><a href='/p/info.html'>서버정보</a></li>
-<li><a href='/p/item.html'>서버가이드</a></li>
-<li><a href='/p/monster.html'>사냥터정보</a></li>
-<li><a href='/p/boss.html'>보스정보</a></li>
-<li><a href='/p/hongbo.html'>서버홍보</a></li>
-<li><a href='/p/cash.html'>후원정보</a></li>
-<li><a href='/p/customer.html'>고객센터</a></li>
-
-</ul>
-
-<!-- ===== KITTY HUB ===== -->
-<div class="kitty-hub">
-  <a href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">다운로드</a>
-  <a href="https://t.me/kitty20262026" target="_blank">텔레그램</a>
-  <a href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오톡</a>
-  <a href="https://discord.gg/ecBhq6Y9" target="_blank">디스코드</a>
-</div>
-
-</div>
-
-<!-- ===== 상단 다운로드 버튼 ===== -->
-<div class='submit-video'>
-  <a class="kitty-download"
-     href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view"
-     target="_blank">다운로드</a>
-</div>
-
-</div>
-</div>
-
-
-<!-- ================= MAIN BANNER ================= -->
-<section class='section-promotion'>
-<div class='banner-wrap'>
-
-<video autoplay loop muted style='width:100%'>
-<source src="여기에배너영상.mp4" type="video/mp4">
-</video>
-
-</div>
-</section>
-
-
-<!-- ================= MAIN TEXT ================= -->
-<div style="text-align:center; margin:40px 0; color:#fff;">
-
-<h1 style="font-size:40px;">KITTY 서버</h1>
-<p style="font-size:18px; opacity:0.8;">
-직장인 / 무과금 최적화 반놀자 서버
-</p>
-
-</div>
-
-
-<!-- ================= FOOTER ================= -->
-<div style="text-align:center; padding:40px; color:#aaa;">
-© KITTY SERVER
-</div>
+});
+</script>
+<!-- ========================= -->
