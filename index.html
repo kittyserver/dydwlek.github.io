@@ -23,6 +23,77 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
+/* ===== 인트로 오버레이 ===== */
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#000;
+  display:none; /* JS에서 보여줌 */
+}
+.intro.show{ display:block; }
+
+.intro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('intro.jpg.png') center/cover no-repeat;
+  filter:contrast(1.05) saturate(1.05);
+}
+
+.intro::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 30%, rgba(0,0,0,0.15), rgba(0,0,0,0.8));
+}
+
+.intro-ui{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:18px 18px 20px;
+}
+
+.intro-title{
+  position:relative;
+  z-index:1;
+  font-weight:900;
+  letter-spacing:.5px;
+  text-shadow:0 6px 20px rgba(0,0,0,.6);
+}
+
+.intro-btns{
+  position:relative;
+  z-index:1;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.intro-btn{
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(10,12,18,.55);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:800;
+  backdrop-filter: blur(6px);
+}
+.intro-btn.primary{
+  background:linear-gradient(135deg,#ffd86b,#ffb700);
+  border:none;
+  color:#0b0f1a;
+}
+.intro-btn:hover{ transform:translateY(-1px); }
+
+.fade-out{ animation:fadeOut .35s ease forwards; }
+@keyframes fadeOut{ to{ opacity:0; visibility:hidden; } }
+
 /* ===== 배너 ===== */
 .banner-wrap{
   position:relative;
@@ -59,39 +130,6 @@ body{
   100%{ left:140% }
 }
 
-.banner-overlay{
-  position:absolute;
-  left:18px;
-  right:18px;
-  bottom:14px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.banner-overlay a{
-  padding:10px 14px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:800;
-  border:1px solid rgba(58,79,122,.9);
-  background:rgba(15,22,38,.55);
-  color:#e9eefc;
-  backdrop-filter: blur(6px);
-}
-
-.banner-overlay a:hover{
-  transform:translateY(-1px);
-  background:rgba(27,42,68,.65);
-}
-
-.banner-overlay a.cta{
-  background:linear-gradient(135deg,#ffd86b,#ffb700);
-  color:#0b0f1a;
-  border:none;
-  box-shadow:0 6px 18px rgba(255,190,0,.35);
-}
-
 /* ===== 카드 ===== */
 .box{
   background:#0f1626;
@@ -122,23 +160,29 @@ a.btn:hover{background:#1b2a44}
   color:#93a4c7;
   font-size:12px;
 }
-
-@media (max-width:520px){
-  .banner-overlay{left:12px;right:12px;bottom:10px}
-  .banner-overlay a{padding:9px 12px}
-}
 </style>
 </head>
 
 <body>
+
+<!-- ✅ 인트로 화면 -->
+<div id="intro" class="intro">
+  <div class="intro-ui">
+    <div class="intro-title">키티서버</div>
+    <div class="intro-btns">
+      <button class="intro-btn" id="skipBtn" type="button">SKIP</button>
+      <button class="intro-btn primary" id="enterBtn" type="button">ENTER</button>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
 <div class="card">
 
 <!-- ===== 배너 ===== -->
 <div class="banner-wrap">
-  <img src="banner_glow_open_fix.jpg" class="banner-img">
+  <img src="banner_glow_open_fix.jpg" class="banner-img" alt="키티서버 배너">
   <div class="banner-shine"></div>
-
 </div>
 
 <!-- 공지 -->
@@ -155,7 +199,7 @@ a.btn:hover{background:#1b2a44}
 <div class="box">
 <h2>⬇️ 다운로드</h2>
 <div class="btns">
-<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank" rel="noopener">
 접속기 다운로드
 </a>
 </div>
@@ -165,9 +209,9 @@ a.btn:hover{background:#1b2a44}
 <div class="box">
 <h2>💬 커뮤니티</h2>
 <div class="btns">
-<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
-<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
-<a class="btn" href="https://t.me/kitty20262026" target="_blank">Telegram</a>
+<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank" rel="noopener">Discord</a>
+<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank" rel="noopener">카카오 단톡</a>
+<a class="btn" href="https://t.me/kitty20262026" target="_blank" rel="noopener">Telegram</a>
 </div>
 </div>
 
@@ -175,5 +219,30 @@ a.btn:hover{background:#1b2a44}
 
 </div>
 </div>
+
+<script>
+/* ✅ 첫 방문에만 인트로 보여주기 */
+const intro = document.getElementById('intro');
+const skipBtn = document.getElementById('skipBtn');
+const enterBtn = document.getElementById('enterBtn');
+
+function closeIntro(){
+  intro.classList.add('fade-out');
+  localStorage.setItem('kitty_intro_seen','1');
+  setTimeout(()=> intro.remove(), 400);
+}
+
+const seen = localStorage.getItem('kitty_intro_seen') === '1';
+if(!seen) intro.classList.add('show');
+else intro.remove();
+
+skipBtn.addEventListener('click', closeIntro);
+enterBtn.addEventListener('click', closeIntro);
+
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && document.getElementById('intro')) closeIntro();
+});
+</script>
+
 </body>
 </html>
