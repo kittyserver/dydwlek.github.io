@@ -6,109 +6,141 @@
 <title>키티서버</title>
 
 <style>
-/* ===== 배경 ===== */
 body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;
   color:#e9eefc;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(80,120,255,0.18), transparent 42%),
-    radial-gradient(circle at 80% 0%, rgba(255,200,80,0.14), transparent 40%),
-    radial-gradient(900px 420px at 50% -220px, rgba(27,42,68,0.9), transparent 65%),
-    #0b0f1a;
+  background:#0b0f1a;
 }
 
-/* ===== 인트로 (2초 자동 스킵 + 로딩바) ===== */
+/* =========================
+   인트로
+========================= */
 .intro{
   position:fixed;
   inset:0;
   z-index:9999;
   background:#000;
-  display:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.intro.show{ display:block; }
 
-.intro::before{
-  content:"";
+.intro-bg{
   position:absolute;
   inset:0;
-  background:#000 url('intro.jpg.png') center/contain no-repeat;
-  pointer-events:none; /* 클릭 가로채기 방지 */
-}
-.intro::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at center, rgba(0,0,0,0.25), rgba(0,0,0,0.88));
-  pointer-events:none;
+  background:url('intro.jpg.png') center/cover no-repeat;
+  filter:brightness(.7);
 }
 
 .intro-center{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  text-align:center;
+  position:relative;
   z-index:2;
-  padding:24px;
+  text-align:center;
 }
 
 .intro-title{
+  font-size:32px;
   font-weight:900;
-  letter-spacing:.6px;
-  font-size:22px;
-  text-shadow:0 8px 24px rgba(0,0,0,.7);
-  user-select:none;
+  margin-bottom:14px;
+  text-shadow:0 4px 20px rgba(0,0,0,.6);
 }
 
-/* 로딩바 */
-.loader{
-  width:min(320px, 76vw);
-  height:10px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(10,12,18,.45);
+.intro-bar{
+  width:180px;
+  height:6px;
+  border-radius:4px;
+  background:rgba(255,255,255,.15);
   overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  margin:0 auto 16px;
 }
-.loader > span{
-  display:block;
+
+.intro-bar-fill{
   height:100%;
   width:0%;
-  border-radius:999px;
-  background:linear-gradient(135deg,#ffd86b,#ffb700);
-  animation:loadFill 2s linear forwards;
-}
-@keyframes loadFill{
-  to{ width:100%; }
+  background:linear-gradient(90deg,#ffd86b,#ffb700);
+  animation:introLoad 2s linear forwards;
 }
 
-/* 안내 텍스트 */
-.hint{
-  font-size:12px;
-  color:rgba(233,238,252,.85);
+@keyframes introLoad{
+  to{width:100%}
+}
+
+.intro-skip{
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(0,0,0,.4);
+  padding:8px 18px;
+  border-radius:20px;
+  font-weight:700;
+  color:#fff;
+}
+
+.fade-out{
+  animation:fadeOut .4s forwards;
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+
+/* =========================
+   상단 히어로
+========================= */
+.hero{
+  position:relative;
+  height:420px;
+  background:url('intro.jpg.png') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.75));
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+}
+
+.hero-title{
+  font-size:64px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#ffd86b;
+  text-shadow:0 6px 30px rgba(0,0,0,.7);
+  margin-bottom:10px;
+}
+
+.hero-sub{
+  font-size:20px;
+  color:#fff;
   opacity:.9;
-  user-select:none;
 }
 
-/* 닫힐 때 */
-.fade-out{ animation:fadeOut .35s ease forwards; }
-@keyframes fadeOut{ to{ opacity:0; visibility:hidden; } }
+/* =========================
+   본문 카드
+========================= */
+.wrap{
+  max-width:960px;
+  margin:-60px auto 40px;
+  padding:0 20px;
+}
 
-/* ===== 메인 ===== */
-.wrap{max-width:960px;margin:0 auto;padding:28px}
 .card{
   background:#121a2b;
   border:1px solid #22304f;
   border-radius:18px;
   padding:22px;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
+
 .banner-wrap{
   position:relative;
   overflow:hidden;
@@ -116,128 +148,156 @@ body{
   margin-bottom:18px;
   border:1px solid #22304f;
 }
-.banner-img{width:100%;display:block;}
+
+.banner-img{
+  width:100%;
+  display:block;
+}
+
 .banner-shine{
-  position:absolute;top:0;left:-40%;width:40%;height:100%;
-  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0) 100%);
   transform:skewX(-20deg);
   animation:shineMove 3.5s infinite;
-  pointer-events:none;
 }
-@keyframes shineMove{0%{left:-40%}100%{left:140%}}
+
+@keyframes shineMove{
+  0%{left:-40%}
+  100%{left:140%}
+}
 
 .box{
-  background:#0f1626;border:1px solid #22304f;border-radius:14px;
-  padding:16px;margin-bottom:14px;
+  background:#0f1626;
+  border:1px solid #22304f;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:14px;
 }
+
 h2{margin:0 0 8px}
+
 .list{margin:0;padding-left:18px}
-.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-a.btn{
-  padding:10px 14px;border-radius:12px;text-decoration:none;color:#e9eefc;border:1px solid #3a4f7a;
+
+.btns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
 }
-a.btn:hover{background:#1b2a44}
-.footer{margin-top:18px;color:#93a4c7;font-size:12px}
-@media (max-width:520px){ .wrap{padding:18px} }
+
+a.btn{
+  padding:10px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#e9eefc;
+  border:1px solid #3a4f7a;
+}
+
+a.btn:hover{
+  background:#1b2a44;
+}
+
+.footer{
+  margin-top:18px;
+  color:#93a4c7;
+  font-size:12px;
+  text-align:center;
+}
 </style>
 </head>
 
 <body>
 
-<!-- ✅ 인트로 (2초 자동) -->
+<!-- =========================
+     인트로
+========================= -->
 <div id="intro" class="intro">
+  <div class="intro-bg"></div>
+
   <div class="intro-center">
     <div class="intro-title">키티서버</div>
-    <div class="loader" aria-label="loading"><span></span></div>
-    <div class="hint">2초 후 자동 입장 · 화면 아무 곳이나 누르면 즉시 입장</div>
+
+    <div class="intro-bar">
+      <div class="intro-bar-fill"></div>
+    </div>
+
+    <div class="intro-skip" id="skipBtn">SKIP</div>
   </div>
 </div>
 
-<!-- ✅ 메인 -->
-<div class="wrap">
-  <div class="card">
-
-    <div class="banner-wrap">
-      <img src="banner_glow_open_fix.jpg" class="banner-img" alt="키티서버 배너">
-      <div class="banner-shine"></div>
-    </div>
-
-    <div class="box">
-      <h2>📢 공지</h2>
-      <ul class="list">
-        <li>3월 1일 ~ 8일 2차 오픈</li>
-        <li>디스코드 및 단톡 참여 후 접속</li>
-        <li>오대기: 3월 1일 18시~20시</li>
-      </ul>
-    </div>
-
-    <div class="box">
-      <h2>⬇️ 다운로드</h2>
-      <div class="btns">
-        <a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank" rel="noopener">접속기 다운로드</a>
-      </div>
-    </div>
-
-    <div class="box">
-      <h2>💬 커뮤니티</h2>
-      <div class="btns">
-        <a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank" rel="noopener">Discord</a>
-        <a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank" rel="noopener">카카오 단톡</a>
-        <a class="btn" href="https://t.me/kitty20262026" target="_blank" rel="noopener">Telegram</a>
-      </div>
-    </div>
-
-    <div class="footer">© 키티서버</div>
+<!-- =========================
+     상단 히어로
+========================= -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-title">KITTY 서버</div>
+    <div class="hero-sub">리마스터 · 2차 오픈</div>
   </div>
+</section>
+
+<!-- =========================
+     본문
+========================= -->
+<div class="wrap">
+<div class="card">
+
+<div class="banner-wrap">
+  <img src="banner_glow_open_fix.jpg" class="banner-img">
+  <div class="banner-shine"></div>
+</div>
+
+<div class="box">
+<h2>📢 공지</h2>
+<ul class="list">
+<li>3월 1일 ~ 8일 2차 오픈</li>
+<li>디스코드 및 단톡 참여 후 접속</li>
+<li>오대기: 3월 1일 18시~20시</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>⬇️ 다운로드</h2>
+<div class="btns">
+<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+접속기 다운로드
+</a>
+</div>
+</div>
+
+<div class="box">
+<h2>💬 커뮤니티</h2>
+<div class="btns">
+<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
+<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
+<a class="btn" href="https://t.me/kitty20262026" target="_blank">Telegram</a>
+</div>
+</div>
+
+<div class="footer">© 키티서버</div>
+
+</div>
 </div>
 
 <script>
-/* ===== 인트로 제어 ===== */
 const intro = document.getElementById('intro');
-
-/* 사운드: 브라우저 정책상 자동재생이 막힐 수 있음.
-   - 가능한 경우: 자동 재생
-   - 막히면: 유저가 화면을 한번 터치/클릭할 때 재생 시도 */
-let audio = null;
-try{
-  audio = new Audio('intro.mp3'); // ✅ intro.mp3 파일 업로드 필요
-  audio.volume = 0.6;
-} catch(e){ audio = null; }
-
-function tryPlayAudio(){
-  if(!audio) return;
-  const p = audio.play();
-  if(p && typeof p.catch === 'function'){
-    p.catch(()=>{/* 자동재생 막혀도 조용히 무시 */});
-  }
-}
+const skipBtn = document.getElementById('skipBtn');
 
 function closeIntro(){
-  if(!document.getElementById('intro')) return;
   intro.classList.add('fade-out');
-  if(audio){
-    try{ audio.pause(); audio.currentTime = 0; }catch(e){}
-  }
-  setTimeout(()=> intro.remove(), 400);
+  setTimeout(()=>intro.remove(),400);
 }
 
-/* ✅ 매번 인트로 표시 */
-intro.classList.add('show');
-tryPlayAudio();
+skipBtn.addEventListener('click', closeIntro);
 
-/* ✅ 2초 후 자동 스킵 */
-const timer = setTimeout(closeIntro, 2000);
-
-/* ✅ 화면 아무데나 누르면 즉시 입장 + (자동재생 막힌 경우) 사운드도 이때 시도 */
-function instantEnter(){
-  clearTimeout(timer);
-  tryPlayAudio();
-  closeIntro();
-}
-intro.addEventListener('click', instantEnter, {passive:true});
-window.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape') instantEnter();
-});
+/* 2초 자동 종료 */
+setTimeout(closeIntro, 2000);
 </script>
 
 </body>
