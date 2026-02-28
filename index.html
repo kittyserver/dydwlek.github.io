@@ -173,6 +173,53 @@ body{
   100%{left:140%}
 }
 
+/* =========================
+   통계 바
+========================= */
+.stats{
+  margin:14px 0 18px;
+  border:1px solid rgba(255,191,0,.35);
+  border-radius:14px;
+  background:radial-gradient(120% 120% at 50% 0%, rgba(255,191,0,.08), rgba(0,0,0,.35));
+  overflow:hidden;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+}
+
+.stat{
+  padding:18px 10px;
+  text-align:center;
+  position:relative;
+}
+
+.stat:not(:last-child){
+  border-right:1px solid rgba(255,191,0,.25);
+}
+
+.stat-icon{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.stat-value{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#ffd86b;
+  text-shadow:0 10px 24px rgba(0,0,0,.75);
+  line-height:1;
+}
+
+.stat-label{
+  margin-top:8px;
+  font-size:12px;
+  color:#c7d3f3;
+  opacity:.85;
+}
+
 .box{
   background:#0f1626;
   border:1px solid #22304f;
@@ -215,26 +262,17 @@ a.btn:hover{
 
 <body>
 
-<!-- =========================
-     인트로
-========================= -->
+<!-- 인트로 -->
 <div id="intro" class="intro">
   <div class="intro-bg"></div>
-
   <div class="intro-center">
     <div class="intro-title">키티서버</div>
-
-    <div class="intro-bar">
-      <div class="intro-bar-fill"></div>
-    </div>
-
+    <div class="intro-bar"><div class="intro-bar-fill"></div></div>
     <div class="intro-skip" id="skipBtn">SKIP</div>
   </div>
 </div>
 
-<!-- =========================
-     상단 히어로
-========================= -->
+<!-- 히어로 -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-title">KITTY 서버</div>
@@ -242,17 +280,48 @@ a.btn:hover{
   </div>
 </section>
 
-<!-- =========================
-     본문
-========================= -->
+<!-- 본문 -->
 <div class="wrap">
 <div class="card">
 
+<!-- 배너 -->
 <div class="banner-wrap">
   <img src="banner_glow_open_fix.jpg" class="banner-img">
   <div class="banner-shine"></div>
 </div>
 
+<!-- 통계바 -->
+<div class="stats">
+  <div class="stats-grid">
+
+    <div class="stat">
+      <div class="stat-icon">👤</div>
+      <div class="stat-value">249</div>
+      <div class="stat-label">현재 접속자</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-icon">⚔️</div>
+      <div class="stat-value">X5000</div>
+      <div class="stat-label">경험치 배율</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-icon">🏆</div>
+      <div class="stat-value">1,284</div>
+      <div class="stat-label">총 가입자</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-icon">🔥</div>
+      <div class="stat-value">365</div>
+      <div class="stat-label">운영 일수</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 공지 -->
 <div class="box">
 <h2>📢 공지</h2>
 <ul class="list">
@@ -262,6 +331,7 @@ a.btn:hover{
 </ul>
 </div>
 
+<!-- 다운로드 -->
 <div class="box">
 <h2>⬇️ 다운로드</h2>
 <div class="btns">
@@ -271,6 +341,7 @@ a.btn:hover{
 </div>
 </div>
 
+<!-- 커뮤니티 -->
 <div class="box">
 <h2>💬 커뮤니티</h2>
 <div class="btns">
@@ -295,8 +366,6 @@ function closeIntro(){
 }
 
 skipBtn.addEventListener('click', closeIntro);
-
-/* 2초 자동 종료 */
 setTimeout(closeIntro, 2000);
 </script>
 
