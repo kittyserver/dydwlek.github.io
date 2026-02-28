@@ -19,67 +19,47 @@ body{
 }
 
 /* ===== 인트로 (가운데 SKIP) ===== */
-.intro{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:#000;
-  display:none;
-}
-.intro.show{ display:block; }
+.intro{position:fixed;inset:0;z-index:9999;background:#000;display:none;}
+.intro.show{display:block;}
 
 .intro::before{
-  content:"";
-  position:absolute;
-  inset:0;
+  content:"";position:absolute;inset:0;
   background:url('intro.jpg.png') center/cover no-repeat;
   filter:contrast(1.03) saturate(1.02);
+  pointer-events:none;
 }
 .intro::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 50% 35%, rgba(0,0,0,0.10), rgba(0,0,0,0.78));
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 35%, rgba(0,0,0,0.10), rgba(0,0,0,0.78));
+  pointer-events:none;
 }
 
 .intro-center{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  text-align:center;
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:14px;text-align:center;
+  z-index:2;
 }
 
 .intro-title{
-  font-weight:900;
-  letter-spacing:.6px;
-  font-size:22px;
+  font-weight:900;letter-spacing:.6px;font-size:22px;
   text-shadow:0 8px 24px rgba(0,0,0,.7);
+  user-select:none;
 }
 
 .intro-skip{
-  cursor:pointer;
-  padding:12px 22px;
-  border-radius:999px;
-  font-weight:900;
-  border:1px solid rgba(255,255,255,.25);
-  background:rgba(10,12,18,.55);
-  color:#fff;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  position:relative;z-index:3;
+  cursor:pointer;padding:12px 22px;border-radius:999px;
+  font-weight:900;border:1px solid rgba(255,255,255,.25);
+  background:rgba(10,12,18,.55);color:#fff;
+  backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);
   box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-.intro-skip:hover{
-  transform:translateY(-1px);
-  background:rgba(20,24,40,.65);
-}
+.intro-skip:hover{transform:translateY(-1px);background:rgba(20,24,40,.65);}
 
-.fade-out{ animation:fadeOut .35s ease forwards; }
-@keyframes fadeOut{ to{ opacity:0; visibility:hidden; } }
+.fade-out{animation:fadeOut .35s ease forwards;}
+@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
 
 /* ===== 메인 ===== */
 .wrap{max-width:960px;margin:0 auto;padding:28px}
