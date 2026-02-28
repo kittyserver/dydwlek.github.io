@@ -1,156 +1,18 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>키티서버</title>
-<meta name="description" content="키티서버 공식 사이트">
-
-<style>
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;
-  background:#0b0f1a;
-  color:#e9eefc;
-}
-
-.wrap{max-width:960px;margin:0 auto;padding:28px}
-.card{
-  background:#121a2b;
-  border:1px solid #22304f;
-  border-radius:18px;
-  padding:22px;
-  box-shadow:0 10px 30px rgba(0,0,0,.25)
-}
-
-/* ===== 배너 ===== */
-.banner-wrap{
-  position:relative;
-  overflow:hidden;
-  border-radius:14px;
-  margin-bottom:18px;
-}
-
-.banner-img{
-  width:100%;
-  display:block;
-}
-
-.shine{
-  position:absolute;
-  top:0;
-  left:-40%;
-  width:40%;
-  height:100%;
-  background:linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.35) 50%,
-    rgba(255,255,255,0) 100%
-  );
-  transform:skewX(-20deg);
-  animation:shineMove 3.5s infinite;
-}
-
-@keyframes shineMove{
-  0%{ left:-40% }
-  100%{ left:140% }
-}
-/* ===== 끝 ===== */
-
-.top{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.logo{
-  width:76px;height:76px;border-radius:18px;
-  background:linear-gradient(135deg,#ff4fd8,#6aa8ff);
-  display:grid;place-items:center;font-weight:800
-}
-
-h1{margin:0;font-size:28px}
-.sub{margin:6px 0 0;color:#b9c6e6}
-
-.grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
-@media(min-width:820px){.grid{grid-template-columns:1fr 1fr}}
-
-.box{
-  background:#0f1626;
-  border:1px solid #22304f;
-  border-radius:14px;
-  padding:16px
-}
-
-.box h2{margin:0 0 8px;font-size:16px}
-.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-
-a.btn{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:12px;
-  text-decoration:none;
-  color:#0b0f1a;
-  background:#e9eefc;
-  font-weight:700
-}
-
-a.btn.secondary{
-  background:transparent;
-  color:#e9eefc;
-  border:1px solid #3a4f7a
-}
-
-.footer{margin-top:18px;color:#93a4c7;font-size:12px}
-.tag{
-  display:inline-block;
-  padding:4px 10px;
-  border-radius:999px;
-  background:#192643;
-  border:1px solid #2a3a61;
-  color:#cfe0ff;
-  font-size:12px;
-  margin-right:6px
-}
-.list{margin:0;padding-left:18px;color:#cfe0ff}
-</style>
-</head>
-
-<body>
-<div class="wrap">
-<div class="card">
-
-<!-- ===== 애니메이션 배너 ===== -->
-<div class="banner-wrap">
-  <img src="banner_glow_open_fix.jpg" class="banner-img">
-  <div class="shine"></div>
-</div>
-<!-- ===================== -->
-
-<div class="top">
-  <div class="logo">KITTY</div>
-  <div>
-    <h1>키티서버</h1>
-    <div class="sub">공식 사이트 · 다운로드 · 커뮤니티</div>
-    <div style="margin-top:10px">
-      <span class="tag">비영리</span>
-      <span class="tag">2차 오픈</span>
-      <span class="tag">커뮤니티</span>
-    </div>
-  </div>
-</div>
-
-<div class="grid">
-
 <div class="box">
 <h2>📢 공지</h2>
 <ul class="list">
 <li>3월 1일 ~ 8일 2차 오픈</li>
 <li>디스코드 및 단톡 참여 후 접속</li>
-<li>오대기: 3월 1일 17시</li>
+<li>오대기: 3월 1일 18시~20시</li>
 </ul>
 </div>
 
 <div class="box">
 <h2>⬇️ 다운로드</h2>
 <div class="btns">
-<a class="btn secondary" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">접속기 다운로드</a>
+<a class="btn secondary" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+접속기 다운로드
+</a>
 </div>
 </div>
 
@@ -159,14 +21,8 @@ a.btn.secondary{
 <div class="btns">
 <a class="btn secondary" href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
 <a class="btn secondary" href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
+<a class="btn secondary" href="https://t.me/kitty20262026" target="_blank">Telegram</a>
 </div>
-</div>
-
 </div>
 
 <div class="footer">© 키티서버</div>
-
-</div>
-</div>
-</body>
-</html>
