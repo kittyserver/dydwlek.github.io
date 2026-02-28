@@ -25,47 +25,36 @@ body{
   align-items:center;
   justify-content:center;
 }
-
 .intro-bg{
   position:absolute;
   inset:0;
   background:url('intro.jpg.png') center/cover no-repeat;
   filter:brightness(.7);
 }
-
 .intro-center{
   position:relative;
   z-index:2;
   text-align:center;
 }
-
 .intro-title{
   font-size:32px;
   font-weight:900;
   margin-bottom:14px;
   text-shadow:0 4px 20px rgba(0,0,0,.6);
 }
-
 .intro-bar{
-  width:180px;
-  height:6px;
-  border-radius:4px;
+  width:180px;height:6px;border-radius:4px;
   background:rgba(255,255,255,.15);
   overflow:hidden;
   margin:0 auto 16px;
 }
-
 .intro-bar-fill{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#ffd86b,#ffb700);
   animation:introLoad 2s linear forwards;
 }
-
-@keyframes introLoad{
-  to{width:100%}
-}
-
+@keyframes introLoad{ to{width:100%} }
 .intro-skip{
   cursor:pointer;
   border:1px solid rgba(255,255,255,.35);
@@ -75,14 +64,8 @@ body{
   font-weight:700;
   color:#fff;
 }
-
-.fade-out{
-  animation:fadeOut .4s forwards;
-}
-
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden}
-}
+.fade-out{ animation:fadeOut .4s forwards; }
+@keyframes fadeOut{ to{opacity:0;visibility:hidden} }
 
 /* =========================
    상단 히어로
@@ -96,19 +79,12 @@ body{
   justify-content:center;
   text-align:center;
 }
-
 .hero::after{
   content:"";
-  position:absolute;
-  inset:0;
+  position:absolute; inset:0;
   background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.75));
 }
-
-.hero-inner{
-  position:relative;
-  z-index:1;
-}
-
+.hero-inner{ position:relative; z-index:1; }
 .hero-title{
   font-size:64px;
   font-weight:900;
@@ -117,7 +93,6 @@ body{
   text-shadow:0 6px 30px rgba(0,0,0,.7);
   margin-bottom:10px;
 }
-
 .hero-sub{
   font-size:20px;
   color:#fff;
@@ -132,7 +107,6 @@ body{
   margin:-60px auto 40px;
   padding:0 20px;
 }
-
 .card{
   background:#121a2b;
   border:1px solid #22304f;
@@ -140,7 +114,6 @@ body{
   padding:22px;
   box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-
 .banner-wrap{
   position:relative;
   overflow:hidden;
@@ -148,18 +121,11 @@ body{
   margin-bottom:18px;
   border:1px solid #22304f;
 }
-
-.banner-img{
-  width:100%;
-  display:block;
-}
-
+.banner-img{ width:100%; display:block; }
 .banner-shine{
   position:absolute;
-  top:0;
-  left:-40%;
-  width:40%;
-  height:100%;
+  top:0; left:-40%;
+  width:40%; height:100%;
   background:linear-gradient(120deg,
     rgba(255,255,255,0) 0%,
     rgba(255,255,255,0.35) 50%,
@@ -167,59 +133,87 @@ body{
   transform:skewX(-20deg);
   animation:shineMove 3.5s infinite;
 }
-
-@keyframes shineMove{
-  0%{left:-40%}
-  100%{left:140%}
-}
+@keyframes shineMove{ 0%{left:-40%} 100%{left:140%} }
 
 /* =========================
-   통계 바
+   3x3 정보 카드 그리드
 ========================= */
-.stats{
-  margin:14px 0 18px;
-  border:1px solid rgba(255,191,0,.35);
-  border-radius:14px;
-  background:radial-gradient(120% 120% at 50% 0%, rgba(255,191,0,.08), rgba(0,0,0,.35));
-  overflow:hidden;
-}
-
-.stats-grid{
+.info-grid{
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(3, 1fr);
+  gap:14px;
+  margin:10px 0 18px;
 }
 
-.stat{
-  padding:18px 10px;
-  text-align:center;
+.info-card{
   position:relative;
+  border-radius:14px;
+  padding:18px 18px 16px;
+  background:radial-gradient(120% 120% at 30% 10%, rgba(255,191,0,.10), rgba(0,0,0,.35));
+  border:1px solid rgba(255,191,0,.22);
+  box-shadow:0 10px 22px rgba(0,0,0,.35);
+  overflow:hidden;
+  min-height:108px;
 }
 
-.stat:not(:last-child){
-  border-right:1px solid rgba(255,191,0,.25);
+.info-card::before{
+  content:"";
+  position:absolute;
+  left:0; top:0;
+  width:5px; height:100%;
+  background:linear-gradient(180deg,#ffd86b,#ff8a00);
+  opacity:.9;
 }
 
-.stat-icon{
-  font-size:22px;
+.info-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  color:#f6e6b0;
+  opacity:.95;
+  margin-bottom:14px;
+}
+
+.info-icon{
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  border-radius:10px;
+  background:rgba(255,191,0,.10);
+  border:1px solid rgba(255,191,0,.18);
+}
+
+.info-main{
+  font-size:30px;
+  font-weight:900;
+  color:#ffd86b;
+  text-shadow:0 10px 24px rgba(0,0,0,.75);
+  line-height:1.05;
   margin-bottom:8px;
 }
 
-.stat-value{
-  font-size:34px;
-  font-weight:900;
-  letter-spacing:1px;
-  color:#ffd86b;
-  text-shadow:0 10px 24px rgba(0,0,0,.75);
-  line-height:1;
-}
-
-.stat-label{
-  margin-top:8px;
+.info-sub{
   font-size:12px;
   color:#c7d3f3;
-  opacity:.85;
+  opacity:.8;
+  line-height:1.4;
 }
 
+/* 반응형 */
+@media (max-width: 920px){
+  .info-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width: 520px){
+  .info-grid{ grid-template-columns:1fr; }
+}
+
+/* =========================
+   기존 박스/버튼
+========================= */
 .box{
   background:#0f1626;
   border:1px solid #22304f;
@@ -227,18 +221,14 @@ body{
   padding:16px;
   margin-bottom:14px;
 }
-
 h2{margin:0 0 8px}
-
 .list{margin:0;padding-left:18px}
-
 .btns{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
   margin-top:10px;
 }
-
 a.btn{
   padding:10px 14px;
   border-radius:12px;
@@ -246,11 +236,7 @@ a.btn{
   color:#e9eefc;
   border:1px solid #3a4f7a;
 }
-
-a.btn:hover{
-  background:#1b2a44;
-}
-
+a.btn:hover{ background:#1b2a44; }
 .footer{
   margin-top:18px;
   color:#93a4c7;
@@ -286,39 +272,67 @@ a.btn:hover{
 
 <!-- 배너 -->
 <div class="banner-wrap">
-  <img src="banner_glow_open_fix.jpg" class="banner-img">
+  <img src="banner_glow_open_fix.jpg" class="banner-img" alt="banner">
   <div class="banner-shine"></div>
 </div>
 
-<!-- 통계바 -->
-<div class="stats">
-  <div class="stats-grid">
+<!-- ✅ 3x3 정보카드 (배너 아래 / 공지 위) -->
+<div class="info-grid">
 
-    <div class="stat">
-      <div class="stat-icon">👤</div>
-      <div class="stat-value">249</div>
-      <div class="stat-label">현재 접속자</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-icon">⚔️</div>
-      <div class="stat-value">X5000</div>
-      <div class="stat-label">경험치 배율</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-icon">🏆</div>
-      <div class="stat-value">1,284</div>
-      <div class="stat-label">총 가입자</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-icon">🔥</div>
-      <div class="stat-value">365</div>
-      <div class="stat-label">운영 일수</div>
-    </div>
-
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">⚡</div>경험치</div>
+    <div class="info-main">x10000</div>
+    <div class="info-sub">기본 경험치 10000배 적용</div>
   </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">💰</div>아데나</div>
+    <div class="info-main">x200</div>
+    <div class="info-sub">아데나 드랍 배율 200배 적용</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">🎁</div>아이템 드랍</div>
+    <div class="info-main">x20</div>
+    <div class="info-sub">아이템 드랍 배율 20배 적용</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">🌐</div>버전</div>
+    <div class="info-main">리마전(샤샤)</div>
+    <div class="info-sub">리마전(샤샤) 기반</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">⏱️</div>서버 오픈</div>
+    <div class="info-main">2026.03.01</div>
+    <div class="info-sub">2차 오픈 일정</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">🛡️</div>최대 레벨</div>
+    <div class="info-main">Lv. 91</div>
+    <div class="info-sub">최대 레벨 제한</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">⚔️</div>PvP 시스템</div>
+    <div class="info-main" style="font-size:22px;">카오틱 PvP</div>
+    <div class="info-sub">자유 PvP + 카르마 시스템</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">🏰</div>공성전</div>
+    <div class="info-main" style="font-size:22px;">추후 조율예정</div>
+    <div class="info-sub">공성 일정 없습니다.</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-top"><div class="info-icon">🧪</div>인챈트 배율</div>
+    <div class="info-main" style="font-size:22px;">각 5%</div>
+    <div class="info-sub">무기 | 방어구 | 악세사리</div>
+  </div>
+
 </div>
 
 <!-- 공지 -->
@@ -335,7 +349,7 @@ a.btn:hover{
 <div class="box">
 <h2>⬇️ 다운로드</h2>
 <div class="btns">
-<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank" rel="noopener">
 접속기 다운로드
 </a>
 </div>
@@ -345,9 +359,9 @@ a.btn:hover{
 <div class="box">
 <h2>💬 커뮤니티</h2>
 <div class="btns">
-<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
-<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
-<a class="btn" href="https://t.me/kitty20262026" target="_blank">Telegram</a>
+<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank" rel="noopener">Discord</a>
+<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank" rel="noopener">카카오 단톡</a>
+<a class="btn" href="https://t.me/kitty20262026" target="_blank" rel="noopener">Telegram</a>
 </div>
 </div>
 
@@ -364,8 +378,9 @@ function closeIntro(){
   intro.classList.add('fade-out');
   setTimeout(()=>intro.remove(),400);
 }
-
 skipBtn.addEventListener('click', closeIntro);
+
+/* 2초 자동 종료 */
 setTimeout(closeIntro, 2000);
 </script>
 
