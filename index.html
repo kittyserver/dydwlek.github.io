@@ -6,249 +6,211 @@
 <title>키티서버</title>
 
 <style>
+:root{
+  --bg:#0b0f1a;
+  --card:#121a2b;
+  --line:#22304f;
+  --gold:#ffd86b;
+  --txt:#e9eefc;
+  --muted:#93a4c7;
+
+  --best1:#a855f7;
+  --best2:#6d28d9;
+}
+
 body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;
-  color:#e9eefc;
-  background:#0b0f1a;
+  color:var(--txt);
+  background:var(--bg);
 }
 
-/* =========================
-   인트로
-========================= */
-.intro{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.intro-bg{
-  position:absolute;
-  inset:0;
-  background:url('intro.jpg.png') center/cover no-repeat;
-  filter:brightness(.7);
-}
-.intro-center{
-  position:relative;
-  z-index:2;
-  text-align:center;
-}
-.intro-title{
-  font-size:32px;
-  font-weight:900;
-  margin-bottom:14px;
-  text-shadow:0 4px 20px rgba(0,0,0,.6);
-}
-.intro-bar{
-  width:180px;height:6px;border-radius:4px;
-  background:rgba(255,255,255,.15);
-  overflow:hidden;
-  margin:0 auto 16px;
-}
-.intro-bar-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#ffd86b,#ffb700);
-  animation:introLoad 2s linear forwards;
-}
-@keyframes introLoad{ to{width:100%} }
-.intro-skip{
-  cursor:pointer;
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(0,0,0,.4);
-  padding:8px 18px;
-  border-radius:20px;
-  font-weight:700;
-  color:#fff;
-}
-.fade-out{ animation:fadeOut .4s forwards; }
-@keyframes fadeOut{ to{opacity:0;visibility:hidden} }
+/* 인트로 */
+.intro{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center}
+.intro-bg{position:absolute;inset:0;background:url('intro.jpg.png') center/cover no-repeat;filter:brightness(.7)}
+.intro-center{position:relative;z-index:2;text-align:center}
+.intro-title{font-size:32px;font-weight:900;margin-bottom:14px;text-shadow:0 4px 20px rgba(0,0,0,.6)}
+.intro-bar{width:180px;height:6px;border-radius:4px;background:rgba(255,255,255,.15);overflow:hidden;margin:0 auto 16px}
+.intro-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),#ffb700);animation:introLoad 2s linear forwards}
+@keyframes introLoad{to{width:100%}}
+.intro-skip{cursor:pointer;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.4);padding:8px 18px;border-radius:20px;font-weight:700;color:#fff}
+.fade-out{animation:fadeOut .4s forwards}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
 
-/* =========================
-   상단 히어로
-========================= */
-.hero{
-  position:relative;
-  height:420px;
-  background:url('intro.jpg.png') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.hero::after{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.75));
-}
-.hero-inner{ position:relative; z-index:1; }
-.hero-title{
-  font-size:64px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:#ffd86b;
-  text-shadow:0 6px 30px rgba(0,0,0,.7);
-  margin-bottom:10px;
-}
-.hero-sub{
-  font-size:20px;
-  color:#fff;
-  opacity:.9;
-}
+/* 히어로 */
+.hero{position:relative;height:420px;background:url('intro.jpg.png') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.78))}
+.hero-inner{position:relative;z-index:1}
+.hero-title{font-size:64px;font-weight:900;letter-spacing:2px;color:var(--gold);text-shadow:0 6px 30px rgba(0,0,0,.7)}
+.hero-sub{font-size:20px;color:#fff;opacity:.9;margin-top:10px}
 
-/* =========================
-   본문 카드
-========================= */
-.wrap{
-  max-width:960px;
-  margin:-60px auto 40px;
-  padding:0 20px;
-}
+/* 레이아웃 */
+.wrap{max-width:960px;margin:-60px auto 40px;padding:0 20px}
 .card{
-  background:#121a2b;
-  border:1px solid #22304f;
+  background:linear-gradient(180deg, rgba(255,216,107,.06), rgba(18,26,43,1) 26%);
+  border:1px solid var(--line);
   border-radius:18px;
   padding:22px;
   box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-.banner-wrap{
-  position:relative;
-  overflow:hidden;
-  border-radius:14px;
-  margin-bottom:18px;
-  border:1px solid #22304f;
-}
-.banner-img{ width:100%; display:block; }
+
+/* 배너 */
+.banner-wrap{position:relative;overflow:hidden;border-radius:14px;margin-bottom:18px;border:1px solid var(--line)}
+.banner-img{width:100%;display:block}
 .banner-shine{
-  position:absolute;
-  top:0; left:-40%;
-  width:40%; height:100%;
-  background:linear-gradient(120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.35) 50%,
-    rgba(255,255,255,0) 100%);
-  transform:skewX(-20deg);
-  animation:shineMove 3.5s infinite;
+  position:absolute;top:0;left:-40%;width:40%;height:100%;
+  background:linear-gradient(120deg,rgba(255,255,255,0)0%,rgba(255,255,255,.06)50%,rgba(255,255,255,0)100%);
+  transform:skewX(-20deg);animation:shineMove 3.5s infinite;
 }
-@keyframes shineMove{ 0%{left:-40%} 100%{left:140%} }
+@keyframes shineMove{0%{left:-40%}100%{left:140%}}
 
-/* =========================
-   3x3 정보 카드 그리드
-========================= */
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:14px;
-  margin:10px 0 18px;
-}
-
+/* 정보 카드 */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:10px 0 18px}
 .info-card{
   position:relative;
   border-radius:14px;
-  padding:18px 18px 16px;
+  padding:16px;
   background:radial-gradient(120% 120% at 30% 10%, rgba(255,191,0,.10), rgba(0,0,0,.35));
-  border:1px solid rgba(255,191,0,.22);
-  box-shadow:0 10px 22px rgba(0,0,0,.35);
-  overflow:hidden;
-  min-height:108px;
-}
-
-.info-card::before{
-  content:"";
-  position:absolute;
-  left:0; top:0;
-  width:5px; height:100%;
-  background:linear-gradient(180deg,#ffd86b,#ff8a00);
-  opacity:.9;
-}
-
-.info-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
-  color:#f6e6b0;
-  opacity:.95;
-  margin-bottom:14px;
-}
-
-.info-icon{
-  width:28px;
-  height:28px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-  border-radius:10px;
-  background:rgba(255,191,0,.10);
   border:1px solid rgba(255,191,0,.18);
 }
+.info-top{display:flex;align-items:center;gap:10px;font-weight:800;color:#f6e6b0;margin-bottom:8px}
+.info-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,191,0,.12);border:1px solid rgba(255,191,0,.14)}
+.info-main{font-size:26px;font-weight:900;color:var(--gold)}
+.info-sub{font-size:12px;color:var(--muted);opacity:.95}
 
-.info-main{
-  font-size:30px;
-  font-weight:900;
-  color:#ffd86b;
-  text-shadow:0 10px 24px rgba(0,0,0,.75);
-  line-height:1.05;
-  margin-bottom:8px;
-}
-
-.info-sub{
-  font-size:12px;
-  color:#c7d3f3;
-  opacity:.8;
-  line-height:1.4;
-}
-
-/* 반응형 */
-@media (max-width: 920px){
-  .info-grid{ grid-template-columns:repeat(2, 1fr); }
-}
-@media (max-width: 520px){
-  .info-grid{ grid-template-columns:1fr; }
-}
-
-/* =========================
-   기존 박스/버튼
-========================= */
-.box{
-  background:#0f1626;
-  border:1px solid #22304f;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:14px;
-}
+/* 박스 */
+.box{background:#0f1626;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
 h2{margin:0 0 8px}
 .list{margin:0;padding-left:18px}
-.btns{
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+a.btn{padding:10px 14px;border-radius:12px;text-decoration:none;color:var(--txt);border:1px solid #3a4f7a}
+a.btn:hover{background:#1b2a44}
+.footer{text-align:center;font-size:12px;color:var(--muted);margin-top:14px}
+
+/* =========================
+   패키지(세련 버전)
+========================= */
+.package-section{display:flex;flex-direction:column;gap:14px;margin:12px 0 18px}
+
+.package{
+  position:relative;
   display:flex;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,191,0,.22);
+  background:
+    radial-gradient(140% 120% at 10% 0%, rgba(255,216,107,.10), rgba(0,0,0,.25) 40%),
+    linear-gradient(90deg,#1a0c00,#120b13);
+  box-shadow:0 14px 34px rgba(0,0,0,.45);
+}
+.package::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,0)0%,rgba(255,255,255,.06)50%,rgba(255,255,255,0)100%);
+  pointer-events:none;
+}
+
+/* ✅ BEST 강조 + 애니 */
+.package.best{
+  border-color:rgba(168,85,247,.55);
+  box-shadow:0 18px 46px rgba(168,85,247,.18);
+}
+@keyframes bestPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes bestShine{0%{transform:translateX(-140%)}100%{transform:translateX(220%)}}
+.best-badge{
+  position:absolute;
+  top:12px;right:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--best1),var(--best2));
+  border:1px solid rgba(255,255,255,.22);
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.3px;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+  animation:bestPulse 1.6s infinite;
+  overflow:hidden;
+}
+.best-badge::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-70%;
+  width:60%;
+  height:200%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.65), transparent);
+  animation:bestShine 3s infinite;
+}
+
+.package-left{
+  width:210px;
+  padding:18px 16px;
+  border-right:1px solid rgba(255,191,0,.18);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   gap:10px;
-  flex-wrap:wrap;
-  margin-top:10px;
+  background:linear-gradient(180deg, rgba(255,216,107,.18), rgba(0,0,0,.25));
 }
-a.btn{
-  padding:10px 14px;
+
+.pkg-name{font-weight:950;letter-spacing:.3px;color:var(--gold);font-size:16px}
+.pkg-chip{
+  display:inline-flex;align-items:center;gap:8px;width:max-content;
+  padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.35);font-size:12px;color:#e9eefc;opacity:.95
+}
+.pkg-price{margin-top:4px;font-size:22px;font-weight:950;color:var(--gold);letter-spacing:.2px}
+
+.package-body{flex:1;padding:18px 18px 16px;display:flex;justify-content:space-between;gap:16px}
+.pkg-desc{max-width:660px}
+.pkg-title{font-weight:950;color:#f6e6b0;margin-bottom:8px}
+
+.details{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);border-radius:14px;padding:10px 12px}
+.details summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;
+  font-weight:900;color:#e9eefc;user-select:none
+}
+.details summary::-webkit-details-marker{display:none}
+.details summary .hint{font-size:12px;color:var(--muted);font-weight:700;opacity:.9}
+
+.section{margin-top:12px}
+.section-title{display:flex;align-items:center;gap:8px;font-weight:900;margin:10px 0 8px;color:#f6e6b0;font-size:13px}
+
+.badge{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.25)}
+.badge.fixed{border-color:rgba(34,197,94,.35)}
+.badge.prob{border-color:rgba(245,158,11,.45)}
+.badge.pick{border-color:rgba(168,85,247,.55)}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;padding:0;margin:0;list-style:none}
+.item{padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.22);font-size:12.5px;line-height:1.35}
+.item.full{grid-column:1/-1}
+
+.pkg-btn{
+  align-self:flex-start;
+  padding:10px 16px;
   border-radius:12px;
+  border:1px solid rgba(255,191,0,.55);
+  background:linear-gradient(180deg,#8b0000,#560000);
+  color:#fff;
+  font-weight:950;
   text-decoration:none;
-  color:#e9eefc;
-  border:1px solid #3a4f7a;
+  white-space:nowrap;
+  box-shadow:0 10px 20px rgba(0,0,0,.35);
 }
-a.btn:hover{ background:#1b2a44; }
-.footer{
-  margin-top:18px;
-  color:#93a4c7;
-  font-size:12px;
-  text-align:center;
+.pkg-btn:hover{filter:brightness(1.08)}
+
+@media (max-width: 860px){
+  .package{flex-direction:column}
+  .package-left{width:auto;border-right:0;border-bottom:1px solid rgba(255,191,0,.18)}
+  .package-body{flex-direction:column}
+  .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- 인트로 -->
 <div id="intro" class="intro">
   <div class="intro-bg"></div>
   <div class="intro-center">
@@ -258,7 +220,6 @@ a.btn:hover{ background:#1b2a44; }
   </div>
 </div>
 
-<!-- 히어로 -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-title">KITTY 서버</div>
@@ -266,108 +227,186 @@ a.btn:hover{ background:#1b2a44; }
   </div>
 </section>
 
-<!-- 본문 -->
 <div class="wrap">
-<div class="card">
+  <div class="card">
 
-<!-- 배너 -->
-<div class="banner-wrap">
-  <img src="banner_glow_open_fix.jpg" class="banner-img" alt="banner">
-  <div class="banner-shine"></div>
-</div>
+    <div class="banner-wrap">
+      <img src="banner_glow_open_fix.jpg" class="banner-img" alt="banner">
+      <div class="banner-shine"></div>
+    </div>
 
-<!-- ✅ 3x3 정보카드 (배너 아래 / 공지 위) -->
-<div class="info-grid">
+    <!-- 정보 -->
+    <div class="info-grid">
+      <div class="info-card"><div class="info-top"><div class="info-icon">⚡</div>경험치</div><div class="info-main">x10000</div><div class="info-sub">기본 경험치</div></div>
+      <div class="info-card"><div class="info-top"><div class="info-icon">💰</div>아데나</div><div class="info-main">x200</div><div class="info-sub">드랍 배율</div></div>
+      <div class="info-card"><div class="info-top"><div class="info-icon">🎁</div>아이템</div><div class="info-main">x20</div><div class="info-sub">드랍 배율</div></div>
+      <div class="info-card"><div class="info-top"><div class="info-icon">🌐</div>버전</div><div class="info-main">리마전</div><div class="info-sub">샤샤 기반</div></div>
+      <div class="info-card"><div class="info-top"><div class="info-icon">⏱️</div>오픈</div><div class="info-main">2026.03.01</div><div class="info-sub">2차</div></div>
+      <div class="info-card"><div class="info-top"><div class="info-icon">🛡️</div>최대</div><div class="info-main">Lv.91</div><div class="info-sub">레벨</div></div>
+    </div>
 
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">⚡</div>경험치</div>
-    <div class="info-main">x10000</div>
-    <div class="info-sub">기본 경험치 10000배 적용</div>
+    <!-- 공지/다운/커뮤 -->
+    <div class="box">
+      <h2>📢 공지</h2>
+      <ul class="list">
+        <li>3월 1일 ~ 8일 2차 오픈</li>
+        <li>디스코드 및 단톡 참여 후 접속</li>
+        <li>오대기: 3월 1일 18시~20시</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2>⬇️ 다운로드</h2>
+      <div class="btns">
+        <a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank" rel="noopener">접속기 다운로드</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>💬 커뮤니티</h2>
+      <div class="btns">
+        <a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank" rel="noopener">Discord</a>
+        <a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank" rel="noopener">카카오 단톡</a>
+        <a class="btn" href="https://t.me/kitty20262026" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+
+    <!-- 패키지 -->
+    <div class="package-section">
+
+      <!-- ✅ 신화 패키지 1차 (BEST) -->
+      <div class="package best">
+        <div class="best-badge">BEST</div>
+
+        <div class="package-left">
+          <div class="pkg-name">신화 패키지 1차</div>
+          <div class="pkg-chip">✅ 1차 신화장비패키지</div>
+          <div class="pkg-price">50,000원</div>
+        </div>
+
+        <div class="package-body">
+          <div class="pkg-desc">
+            <div class="pkg-title">구성품 안내</div>
+
+            <details class="details">
+              <summary>
+                <span>📦 구성품 보기</span>
+                <span class="hint">클릭해서 펼치기</span>
+              </summary>
+
+              <div class="section">
+                <div class="section-title">기본 구성 <span class="badge fixed">고정</span></div>
+                <ul class="grid">
+                  <li class="item">+7 할파스[완력/마력/예지력]</li>
+                  <li class="item">+7 에오딘의부츠[부츠]</li>
+                  <li class="item">+7 이실로테의 보호[망토]</li>
+                  <li class="item">+7 에오딘의 장갑[원거리]</li>
+                  <li class="item">+7 에오딘의 각반[각반]</li>
+                  <li class="item">+7 아덴의 명예[팔찌] 2EA</li>
+                  <li class="item">+7 에이르의 결의[가더][격수통일]</li>
+                  <li class="item">+7 군터의 응징[격수용 장갑][요정]</li>
+                  <li class="item">+7 에오딘의수정[법사용]</li>
+                  <li class="item">+7 기란의 인내[벨트]</li>
+                  <li class="item">+7 아인하사드의 룬</li>
+                  <li class="item">+7 전장의견갑</li>
+                  <li class="item">+7 파푸리온의 티셔츠[택]</li>
+                  <li class="item">+7 발라카스의 티셔츠[택]</li>
+                  <li class="item">+7 린드비오르의 티셔츠[택]</li>
+                  <li class="item">+7 [전설] 벨리엘반지 2EA</li>
+                  <li class="item">+7 [전설] 데스나이트목걸이</li>
+                  <li class="item">+7 [전설] 나그바스투구</li>
+                  <li class="item">+7 축붉은귀걸이</li>
+                  <li class="item">+7 축검은귀걸이</li>
+                  <li class="item">+7 투사수호휘장</li>
+                  <li class="item">+7 투사수호문장</li>
+                  <li class="item">+7 투사 팬던트</li>
+                  <li class="item">+7 명궁 팬던트 or (3개중 2개 택)</li>
+                  <li class="item">+7 사냥 팬던트</li>
+                  <li class="item">+7 축체력반지 2EA</li>
+                  <li class="item">할파스인형 or 베히모스 or 아우라키아 1택</li>
+                  <li class="item full">수표 500억</li>
+                  <li class="item full">캐시 5만</li>
+                  <li class="item full">100% 축줌 50장</li>
+                  <li class="item full">+7 신화검 1차</li>
+                </ul>
+              </div>
+
+              <div class="section">
+                <div class="section-title">클래스별 무기 인챈 <span class="badge pick">1개 선택</span></div>
+                <ul class="grid">
+                  <li class="item">+7 에보루타인의 양손검</li>
+                  <li class="item">+7 아우라키아의 체인소드</li>
+                  <li class="item">+7 우그니스의 장궁</li>
+                  <li class="item">+7 인적인 키링크</li>
+                  <li class="item">+7 게렝의 지팡이</li>
+                  <li class="item">+7 고대 신의 도끼</li>
+                  <li class="item">+7 블루디카 크로우</li>
+                  <li class="item">+7 군터의 단도</li>
+                </ul>
+              </div>
+
+            </details>
+          </div>
+
+          <!-- ✅ 후원문의: 텔레 링크로 -->
+          <a href="https://t.me/kitty20262026" target="_blank" rel="noopener" class="pkg-btn">후원 문의</a>
+        </div>
+      </div>
+
+      <!-- 기르격파패키지 -->
+      <div class="package">
+        <div class="package-left">
+          <div class="pkg-name">기르격파패키지</div>
+          <div class="pkg-chip">🎁 추가 상자패키지 [기르격파상자]</div>
+          <div class="pkg-price">50,000원 · 50EA</div>
+        </div>
+
+        <div class="package-body">
+          <div class="pkg-desc">
+            <div class="pkg-title">구성품 안내</div>
+
+            <details class="details">
+              <summary>
+                <span>📦 구성품 보기</span>
+                <span class="hint">고정/확률 포함</span>
+              </summary>
+
+              <div class="section">
+                <div class="section-title">고정 지급 <span class="badge fixed">고정</span></div>
+                <ul class="grid">
+                  <li class="item">고대 신의 사념 1번 1개</li>
+                  <li class="item">고대 신의 사념 2번 1개</li>
+                  <li class="item">명예코인 상자 [50~1000] 150개</li>
+                  <li class="item">기르코인 30개</li>
+                  <li class="item">신화룬조각 50개</li>
+                  <li class="item">신화비법서 5개</li>
+                  <li class="item full">신화 2차 마법상자 1개 (얼티밋 배리어 / 스턴 확률)</li>
+                </ul>
+              </div>
+
+              <div class="section">
+                <div class="section-title">확률 획득 <span class="badge prob">확률</span></div>
+                <ul class="grid">
+                  <li class="item">1억 수표 200개</li>
+                  <li class="item">기르타스 인형 (확률)</li>
+                  <li class="item">기르타스 변신 (확률)</li>
+                  <li class="item">캐시코인 2,000 ~ 20,000 (확률)</li>
+                </ul>
+              </div>
+
+            </details>
+          </div>
+
+          <!-- ✅ 후원문의: 텔레 링크로 -->
+          <a href="https://t.me/kitty20262026" target="_blank" rel="noopener" class="pkg-btn">후원 문의</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">© 키티서버</div>
+
   </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">💰</div>아데나</div>
-    <div class="info-main">x200</div>
-    <div class="info-sub">아데나 드랍 배율 200배 적용</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">🎁</div>아이템 드랍</div>
-    <div class="info-main">x20</div>
-    <div class="info-sub">아이템 드랍 배율 20배 적용</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">🌐</div>버전</div>
-    <div class="info-main">리마전(샤샤)</div>
-    <div class="info-sub">리마전(샤샤) 기반</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">⏱️</div>서버 오픈</div>
-    <div class="info-main">2026.03.01</div>
-    <div class="info-sub">2차 오픈 일정</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">🛡️</div>최대 레벨</div>
-    <div class="info-main">Lv. 91</div>
-    <div class="info-sub">최대 레벨 제한</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">⚔️</div>PvP 시스템</div>
-    <div class="info-main" style="font-size:22px;">카오틱 PvP</div>
-    <div class="info-sub">자유 PvP + 카르마 시스템</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">🏰</div>공성전</div>
-    <div class="info-main" style="font-size:22px;">추후 조율예정</div>
-    <div class="info-sub">공성 일정 없습니다.</div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-top"><div class="info-icon">🧪</div>인챈트 배율</div>
-    <div class="info-main" style="font-size:22px;">각 5%</div>
-    <div class="info-sub">무기 | 방어구 | 악세사리</div>
-  </div>
-
-</div>
-
-<!-- 공지 -->
-<div class="box">
-<h2>📢 공지</h2>
-<ul class="list">
-<li>3월 1일 ~ 8일 2차 오픈</li>
-<li>디스코드 및 단톡 참여 후 접속</li>
-<li>오대기: 3월 1일 18시~20시</li>
-</ul>
-</div>
-
-<!-- 다운로드 -->
-<div class="box">
-<h2>⬇️ 다운로드</h2>
-<div class="btns">
-<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank" rel="noopener">
-접속기 다운로드
-</a>
-</div>
-</div>
-
-<!-- 커뮤니티 -->
-<div class="box">
-<h2>💬 커뮤니티</h2>
-<div class="btns">
-<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank" rel="noopener">Discord</a>
-<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank" rel="noopener">카카오 단톡</a>
-<a class="btn" href="https://t.me/kitty20262026" target="_blank" rel="noopener">Telegram</a>
-</div>
-</div>
-
-<div class="footer">© 키티서버</div>
-
-</div>
 </div>
 
 <script>
@@ -379,8 +418,6 @@ function closeIntro(){
   setTimeout(()=>intro.remove(),400);
 }
 skipBtn.addEventListener('click', closeIntro);
-
-/* 2초 자동 종료 */
 setTimeout(closeIntro, 2000);
 </script>
 
