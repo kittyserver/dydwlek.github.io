@@ -110,7 +110,7 @@ a.btn:hover{background:#1b2a44}
   pointer-events:none;
 }
 
-/* ✅ BEST 강조 + 애니 */
+/* BEST 강조 */
 .package.best{
   border-color:rgba(168,85,247,.55);
   box-shadow:0 18px 46px rgba(168,85,247,.18);
@@ -118,28 +118,20 @@ a.btn:hover{background:#1b2a44}
 @keyframes bestPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes bestShine{0%{transform:translateX(-140%)}100%{transform:translateX(220%)}}
 .best-badge{
-  position:absolute;
-  top:12px;right:12px;
-  padding:6px 10px;
-  border-radius:999px;
+  position:absolute;top:12px;right:12px;
+  padding:6px 10px;border-radius:999px;
   background:linear-gradient(180deg,var(--best1),var(--best2));
   border:1px solid rgba(255,255,255,.22);
-  font-size:11px;
-  font-weight:950;
-  letter-spacing:.3px;
-  color:#fff;
+  font-size:11px;font-weight:950;letter-spacing:.3px;color:#fff;
   box-shadow:0 10px 24px rgba(0,0,0,.35);
   animation:bestPulse 1.6s infinite;
   overflow:hidden;
 }
 .best-badge::after{
   content:"";
-  position:absolute;
-  top:-50%;
-  left:-70%;
-  width:60%;
-  height:200%;
-  background:linear-gradient(120deg, transparent, rgba(255,255,255,.65), transparent);
+  position:absolute;top:-50%;left:-70%;
+  width:60%;height:200%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.65),transparent);
   animation:bestShine 3s infinite;
 }
 
@@ -147,13 +139,9 @@ a.btn:hover{background:#1b2a44}
   width:210px;
   padding:18px 16px;
   border-right:1px solid rgba(255,191,0,.18);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:10px;
+  display:flex;flex-direction:column;justify-content:center;gap:10px;
   background:linear-gradient(180deg, rgba(255,216,107,.18), rgba(0,0,0,.25));
 }
-
 .pkg-name{font-weight:950;letter-spacing:.3px;color:var(--gold);font-size:16px}
 .pkg-chip{
   display:inline-flex;align-items:center;gap:8px;width:max-content;
@@ -206,11 +194,120 @@ a.btn:hover{background:#1b2a44}
   .package-body{flex-direction:column}
   .grid{grid-template-columns:1fr}
 }
+
+/* =========================
+   ✅ "패키지 아이콘" (떠있는 버튼)
+========================= */
+@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.fab{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:9000;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.fab .fab-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,191,0,.35);
+  background:linear-gradient(180deg, rgba(255,216,107,.14), rgba(0,0,0,.35));
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 16px 34px rgba(0,0,0,.45);
+  animation:floatUp 2.2s ease-in-out infinite;
+}
+.fab .fab-ico{
+  width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.14);
+  font-size:18px;
+}
+.fab .fab-txt{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+.fab .fab-txt b{font-size:13px}
+.fab .fab-txt span{font-size:11px;color:var(--muted);opacity:.95}
+
+/* =========================
+   ✅ 패키지 "따로 페이지" 오버레이
+========================= */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:9500;
+  display:none;
+}
+.overlay.on{display:block}
+.overlay-backdrop{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter: blur(6px);
+}
+.overlay-panel{
+  position:relative;
+  max-width:980px;
+  margin:24px auto;
+  padding:0 20px;
+}
+.overlay-card{
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,216,107,.06), rgba(18,26,43,1) 26%);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  overflow:hidden;
+}
+.overlay-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 16px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.05));
+}
+.overlay-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:950;
+  color:#f6e6b0;
+}
+.overlay-title .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(180deg,var(--best1),var(--best2));
+  box-shadow:0 0 18px rgba(168,85,247,.45);
+}
+.icon-btn{
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:12px;
+  font-weight:900;
+}
+.icon-btn:hover{filter:brightness(1.08)}
+.overlay-body{padding:16px}
+
+/* 스크롤 */
+.overlay-body{
+  max-height: calc(100vh - 140px);
+  overflow:auto;
+}
 </style>
 </head>
 
 <body>
 
+<!-- 인트로 -->
 <div id="intro" class="intro">
   <div class="intro-bg"></div>
   <div class="intro-center">
@@ -220,6 +317,7 @@ a.btn:hover{background:#1b2a44}
   </div>
 </div>
 
+<!-- 메인 -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-title">KITTY 서버</div>
@@ -271,141 +369,168 @@ a.btn:hover{background:#1b2a44}
       </div>
     </div>
 
-    <!-- 패키지 -->
-    <div class="package-section">
-
-      <!-- ✅ 신화 패키지 1차 (BEST) -->
-      <div class="package best">
-        <div class="best-badge">BEST</div>
-
-        <div class="package-left">
-          <div class="pkg-name">신화 패키지 1차</div>
-          <div class="pkg-chip">✅ 1차 신화장비패키지</div>
-          <div class="pkg-price">50,000원</div>
-        </div>
-
-        <div class="package-body">
-          <div class="pkg-desc">
-            <div class="pkg-title">구성품 안내</div>
-
-            <details class="details">
-              <summary>
-                <span>📦 구성품 보기</span>
-                <span class="hint">클릭해서 펼치기</span>
-              </summary>
-
-              <div class="section">
-                <div class="section-title">기본 구성 <span class="badge fixed">고정</span></div>
-                <ul class="grid">
-                  <li class="item">+7 할파스[완력/마력/예지력]</li>
-                  <li class="item">+7 에오딘의부츠[부츠]</li>
-                  <li class="item">+7 이실로테의 보호[망토]</li>
-                  <li class="item">+7 에오딘의 장갑[원거리]</li>
-                  <li class="item">+7 에오딘의 각반[각반]</li>
-                  <li class="item">+7 아덴의 명예[팔찌] 2EA</li>
-                  <li class="item">+7 에이르의 결의[가더][격수통일]</li>
-                  <li class="item">+7 군터의 응징[격수용 장갑][요정]</li>
-                  <li class="item">+7 에오딘의수정[법사용]</li>
-                  <li class="item">+7 기란의 인내[벨트]</li>
-                  <li class="item">+7 아인하사드의 룬</li>
-                  <li class="item">+7 전장의견갑</li>
-                  <li class="item">+7 파푸리온의 티셔츠[택]</li>
-                  <li class="item">+7 발라카스의 티셔츠[택]</li>
-                  <li class="item">+7 린드비오르의 티셔츠[택]</li>
-                  <li class="item">+7 [전설] 벨리엘반지 2EA</li>
-                  <li class="item">+7 [전설] 데스나이트목걸이</li>
-                  <li class="item">+7 [전설] 나그바스투구</li>
-                  <li class="item">+7 축붉은귀걸이</li>
-                  <li class="item">+7 축검은귀걸이</li>
-                  <li class="item">+7 투사수호휘장</li>
-                  <li class="item">+7 투사수호문장</li>
-                  <li class="item">+7 투사 팬던트</li>
-                  <li class="item">+7 명궁 팬던트 or (3개중 2개 택)</li>
-                  <li class="item">+7 사냥 팬던트</li>
-                  <li class="item">+7 축체력반지 2EA</li>
-                  <li class="item">할파스인형 or 베히모스 or 아우라키아 1택</li>
-                  <li class="item full">수표 500억</li>
-                  <li class="item full">캐시 5만</li>
-                  <li class="item full">100% 축줌 50장</li>
-                  <li class="item full">+7 신화검 1차</li>
-                </ul>
-              </div>
-
-              <div class="section">
-                <div class="section-title">클래스별 무기 인챈 <span class="badge pick">1개 선택</span></div>
-                <ul class="grid">
-                  <li class="item">+7 에보루타인의 양손검</li>
-                  <li class="item">+7 아우라키아의 체인소드</li>
-                  <li class="item">+7 우그니스의 장궁</li>
-                  <li class="item">+7 인적인 키링크</li>
-                  <li class="item">+7 게렝의 지팡이</li>
-                  <li class="item">+7 고대 신의 도끼</li>
-                  <li class="item">+7 블루디카 크로우</li>
-                  <li class="item">+7 군터의 단도</li>
-                </ul>
-              </div>
-
-            </details>
-          </div>
-
-          <!-- ✅ 후원문의: 텔레 링크로 -->
-          <a href="https://t.me/kitty20262026" target="_blank" rel="noopener" class="pkg-btn">후원 문의</a>
-        </div>
-      </div>
-
-      <!-- 기르격파패키지 -->
-      <div class="package">
-        <div class="package-left">
-          <div class="pkg-name">기르격파패키지</div>
-          <div class="pkg-chip">🎁 추가 상자패키지 [기르격파상자]</div>
-          <div class="pkg-price">50,000원 · 50EA</div>
-        </div>
-
-        <div class="package-body">
-          <div class="pkg-desc">
-            <div class="pkg-title">구성품 안내</div>
-
-            <details class="details">
-              <summary>
-                <span>📦 구성품 보기</span>
-                <span class="hint">고정/확률 포함</span>
-              </summary>
-
-              <div class="section">
-                <div class="section-title">고정 지급 <span class="badge fixed">고정</span></div>
-                <ul class="grid">
-                  <li class="item">고대 신의 사념 1번 1개</li>
-                  <li class="item">고대 신의 사념 2번 1개</li>
-                  <li class="item">명예코인 상자 [50~1000] 150개</li>
-                  <li class="item">기르코인 30개</li>
-                  <li class="item">신화룬조각 50개</li>
-                  <li class="item">신화비법서 5개</li>
-                  <li class="item full">신화 2차 마법상자 1개 (얼티밋 배리어 / 스턴 확률)</li>
-                </ul>
-              </div>
-
-              <div class="section">
-                <div class="section-title">확률 획득 <span class="badge prob">확률</span></div>
-                <ul class="grid">
-                  <li class="item">1억 수표 200개</li>
-                  <li class="item">기르타스 인형 (확률)</li>
-                  <li class="item">기르타스 변신 (확률)</li>
-                  <li class="item">캐시코인 2,000 ~ 20,000 (확률)</li>
-                </ul>
-              </div>
-
-            </details>
-          </div>
-
-          <!-- ✅ 후원문의: 텔레 링크로 -->
-          <a href="https://t.me/kitty20262026" target="_blank" rel="noopener" class="pkg-btn">후원 문의</a>
-        </div>
-      </div>
-
-    </div>
-
     <div class="footer">© 키티서버</div>
 
+  </div>
+</div>
+
+<!-- ✅ 패키지 아이콘 버튼 (누르면 따로 페이지처럼 열림) -->
+<div class="fab">
+  <button class="fab-btn" id="openPackages" type="button" aria-label="패키지 페이지 열기">
+    <div class="fab-ico">📦</div>
+    <div class="fab-txt">
+      <b>패키지 보기</b>
+      <span>아이콘 클릭</span>
+    </div>
+  </button>
+</div>
+
+<!-- ✅ 패키지 오버레이 페이지 -->
+<div class="overlay" id="pkgOverlay" aria-hidden="true">
+  <div class="overlay-backdrop" id="closeByBg"></div>
+
+  <div class="overlay-panel">
+    <div class="overlay-card">
+      <div class="overlay-head">
+        <div class="overlay-title"><span class="dot"></span> 패키지 안내</div>
+        <button class="icon-btn" id="closePackages" type="button">닫기 ✕</button>
+      </div>
+
+      <div class="overlay-body">
+
+        <div class="package-section">
+
+          <!-- 신화 패키지 1차 (BEST) -->
+          <div class="package best">
+            <div class="best-badge">BEST</div>
+
+            <div class="package-left">
+              <div class="pkg-name">신화 패키지 1차</div>
+              <div class="pkg-chip">✅ 1차 신화장비패키지</div>
+              <div class="pkg-price">50,000원</div>
+            </div>
+
+            <div class="package-body">
+              <div class="pkg-desc">
+                <div class="pkg-title">구성품 안내</div>
+
+                <details class="details">
+                  <summary>
+                    <span>📦 구성품 보기</span>
+                    <span class="hint">클릭해서 펼치기</span>
+                  </summary>
+
+                  <div class="section">
+                    <div class="section-title">기본 구성 <span class="badge fixed">고정</span></div>
+                    <ul class="grid">
+                      <li class="item">+7 할파스[완력/마력/예지력]</li>
+                      <li class="item">+7 에오딘의부츠[부츠]</li>
+                      <li class="item">+7 이실로테의 보호[망토]</li>
+                      <li class="item">+7 에오딘의 장갑[원거리]</li>
+                      <li class="item">+7 에오딘의 각반[각반]</li>
+                      <li class="item">+7 아덴의 명예[팔찌] 2EA</li>
+                      <li class="item">+7 에이르의 결의[가더][격수통일]</li>
+                      <li class="item">+7 군터의 응징[격수용 장갑][요정]</li>
+                      <li class="item">+7 에오딘의수정[법사용]</li>
+                      <li class="item">+7 기란의 인내[벨트]</li>
+                      <li class="item">+7 아인하사드의 룬</li>
+                      <li class="item">+7 전장의견갑</li>
+                      <li class="item">+7 파푸리온의 티셔츠[택]</li>
+                      <li class="item">+7 발라카스의 티셔츠[택]</li>
+                      <li class="item">+7 린드비오르의 티셔츠[택]</li>
+                      <li class="item">+7 [전설] 벨리엘반지 2EA</li>
+                      <li class="item">+7 [전설] 데스나이트목걸이</li>
+                      <li class="item">+7 [전설] 나그바스투구</li>
+                      <li class="item">+7 축붉은귀걸이</li>
+                      <li class="item">+7 축검은귀걸이</li>
+                      <li class="item">+7 투사수호휘장</li>
+                      <li class="item">+7 투사수호문장</li>
+                      <li class="item">+7 투사 팬던트</li>
+                      <li class="item">+7 명궁 팬던트 or (3개중 2개 택)</li>
+                      <li class="item">+7 사냥 팬던트</li>
+                      <li class="item">+7 축체력반지 2EA</li>
+                      <li class="item">할파스인형 or 베히모스 or 아우라키아 1택</li>
+
+                      <li class="item full">수표 500억</li>
+                      <li class="item full">캐시 5만</li>
+                      <li class="item full">100% 축줌 50장</li>
+                      <li class="item full">+7 신화검 1차</li>
+                    </ul>
+                  </div>
+
+                  <div class="section">
+                    <div class="section-title">클래스별 무기 인챈 <span class="badge pick">1개 선택</span></div>
+                    <ul class="grid">
+                      <li class="item">+7 에보루타인의 양손검</li>
+                      <li class="item">+7 아우라키아의 체인소드</li>
+                      <li class="item">+7 우그니스의 장궁</li>
+                      <li class="item">+7 인적인 키링크</li>
+                      <li class="item">+7 게렝의 지팡이</li>
+                      <li class="item">+7 고대 신의 도끼</li>
+                      <li class="item">+7 블루디카 크로우</li>
+                      <li class="item">+7 군터의 단도</li>
+                    </ul>
+                  </div>
+
+                </details>
+              </div>
+
+              <a href="https://t.me/kitty20262026" target="_blank" rel="noopener" class="pkg-btn">후원 문의</a>
+            </div>
+          </div>
+
+          <!-- 기르격파패키지 -->
+          <div class="package">
+            <div class="package-left">
+              <div class="pkg-name">기르격파패키지</div>
+              <div class="pkg-chip">🎁 추가 상자패키지 [기르격파상자]</div>
+              <div class="pkg-price">50,000원 · 50EA</div>
+            </div>
+
+            <div class="package-body">
+              <div class="pkg-desc">
+                <div class="pkg-title">구성품 안내</div>
+
+                <details class="details">
+                  <summary>
+                    <span>📦 구성품 보기</span>
+                    <span class="hint">고정/확률 포함</span>
+                  </summary>
+
+                  <div class="section">
+                    <div class="section-title">고정 지급 <span class="badge fixed">고정</span></div>
+                    <ul class="grid">
+                      <li class="item">고대 신의 사념 1번 1개</li>
+                      <li class="item">고대 신의 사념 2번 1개</li>
+                      <li class="item">명예코인 상자 [50~1000] 150개</li>
+                      <li class="item">기르코인 30개</li>
+                      <li class="item">신화룬조각 50개</li>
+                      <li class="item">신화비법서 5개</li>
+                      <li class="item full">신화 2차 마법상자 1개 (얼티밋 배리어 / 스턴 확률)</li>
+                    </ul>
+                  </div>
+
+                  <div class="section">
+                    <div class="section-title">확률 획득 <span class="badge prob">확률</span></div>
+                    <ul class="grid">
+                      <li class="item">1억 수표 200개</li>
+                      <li class="item">기르타스 인형 (확률)</li>
+                      <li class="item">기르타스 변신 (확률)</li>
+                      <li class="item">캐시코인 2,000 ~ 20,000 (확률)</li>
+                    </ul>
+                  </div>
+
+                </details>
+              </div>
+
+              <a href="https://t.me/kitty20262026" target="_blank" rel="noopener" class="pkg-btn">후원 문의</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
 
@@ -419,6 +544,46 @@ function closeIntro(){
 }
 skipBtn.addEventListener('click', closeIntro);
 setTimeout(closeIntro, 2000);
+
+/* ✅ 패키지 "페이지" 열고 닫기 */
+const overlay = document.getElementById('pkgOverlay');
+const openBtn = document.getElementById('openPackages');
+const closeBtn = document.getElementById('closePackages');
+const closeByBg = document.getElementById('closeByBg');
+
+function openPackages(){
+  overlay.classList.add('on');
+  overlay.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  history.pushState({pkg:true}, '', '#packages');
+}
+function closePackages(fromPop){
+  overlay.classList.remove('on');
+  overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  if(!fromPop && location.hash === '#packages'){
+    history.back();
+  }
+}
+
+openBtn.addEventListener('click', openPackages);
+closeBtn.addEventListener('click', ()=>closePackages(false));
+closeByBg.addEventListener('click', ()=>closePackages(false));
+
+/* ESC로 닫기 */
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && overlay.classList.contains('on')) closePackages(false);
+});
+
+/* 뒤로가기 시 오버레이 닫기 */
+window.addEventListener('popstate', ()=>{
+  if(overlay.classList.contains('on')) closePackages(true);
+});
+
+/* 주소에 #packages로 들어오면 자동 오픈 */
+if(location.hash === '#packages'){
+  openPackages();
+}
 </script>
 
 </body>
