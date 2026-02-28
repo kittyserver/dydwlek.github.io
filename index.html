@@ -1,85 +1,304 @@
-<!-- =========================
-   KITTY 통합 패치 FULL
-   - 왕관 → KITTY 아이콘
-   - 고객센터 KITTY 배너
-   - 디스코드/카톡/텔레/다운로드 버튼
-========================= -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>키티서버</title>
 
 <style>
-/* 왕관 아이콘 → KITTY */
-.label{
-  background:url(https://t1.daumcdn.net/cfile/tistory/998C7A3E5E1E7C7A2F) center/contain no-repeat !important;
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;
+  color:#e9eefc;
+  background:#0b0f1a;
 }
 
-/* 우측 고정 SNS 버튼 */
-.kitty-fixed{
+/* =========================
+   인트로
+========================= */
+.intro{
   position:fixed;
-  right:15px;
-  bottom:90px;
+  inset:0;
   z-index:9999;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.kitty-fixed a{
+  background:#000;
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:8px 12px;
-  border-radius:8px;
-  background:rgba(0,0,0,.85);
+  justify-content:center;
+}
+
+.intro-bg{
+  position:absolute;
+  inset:0;
+  background:url('intro.jpg.png') center/cover no-repeat;
+  filter:brightness(.7);
+}
+
+.intro-center{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.intro-title{
+  font-size:32px;
+  font-weight:900;
+  margin-bottom:14px;
+  text-shadow:0 4px 20px rgba(0,0,0,.6);
+}
+
+.intro-bar{
+  width:180px;
+  height:6px;
+  border-radius:4px;
+  background:rgba(255,255,255,.15);
+  overflow:hidden;
+  margin:0 auto 16px;
+}
+
+.intro-bar-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ffd86b,#ffb700);
+  animation:introLoad 2s linear forwards;
+}
+
+@keyframes introLoad{
+  to{width:100%}
+}
+
+.intro-skip{
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(0,0,0,.4);
+  padding:8px 18px;
+  border-radius:20px;
+  font-weight:700;
   color:#fff;
+}
+
+.fade-out{
+  animation:fadeOut .4s forwards;
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+
+/* =========================
+   상단 히어로
+========================= */
+.hero{
+  position:relative;
+  height:420px;
+  background:url('intro.jpg.png') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.75));
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+}
+
+.hero-title{
+  font-size:64px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#ffd86b;
+  text-shadow:0 6px 30px rgba(0,0,0,.7);
+  margin-bottom:10px;
+}
+
+.hero-sub{
+  font-size:20px;
+  color:#fff;
+  opacity:.9;
+}
+
+/* =========================
+   본문 카드
+========================= */
+.wrap{
+  max-width:960px;
+  margin:-60px auto 40px;
+  padding:0 20px;
+}
+
+.card{
+  background:#121a2b;
+  border:1px solid #22304f;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.banner-wrap{
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  margin-bottom:18px;
+  border:1px solid #22304f;
+}
+
+.banner-img{
+  width:100%;
+  display:block;
+}
+
+.banner-shine{
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0) 100%);
+  transform:skewX(-20deg);
+  animation:shineMove 3.5s infinite;
+}
+
+@keyframes shineMove{
+  0%{left:-40%}
+  100%{left:140%}
+}
+
+.box{
+  background:#0f1626;
+  border:1px solid #22304f;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:14px;
+}
+
+h2{margin:0 0 8px}
+
+.list{margin:0;padding-left:18px}
+
+.btns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+a.btn{
+  padding:10px 14px;
+  border-radius:12px;
   text-decoration:none;
-  font-size:13px;
-  border:1px solid rgba(255,255,255,.15);
-  transition:.2s;
+  color:#e9eefc;
+  border:1px solid #3a4f7a;
 }
 
-.kitty-fixed a:hover{
-  background:#c69c7c;
+a.btn:hover{
+  background:#1b2a44;
 }
 
-.kitty-fixed img{
-  width:18px;
-  height:18px;
+.footer{
+  margin-top:18px;
+  color:#93a4c7;
+  font-size:12px;
+  text-align:center;
 }
 </style>
+</head>
+
+<body>
+
+<!-- =========================
+     인트로
+========================= -->
+<div id="intro" class="intro">
+  <div class="intro-bg"></div>
+
+  <div class="intro-center">
+    <div class="intro-title">키티서버</div>
+
+    <div class="intro-bar">
+      <div class="intro-bar-fill"></div>
+    </div>
+
+    <div class="intro-skip" id="skipBtn">SKIP</div>
+  </div>
+</div>
+
+<!-- =========================
+     상단 히어로
+========================= -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-title">KITTY 서버</div>
+    <div class="hero-sub">리마스터:전 · 2차 오픈</div>
+  </div>
+</section>
+
+<!-- =========================
+     본문
+========================= -->
+<div class="wrap">
+<div class="card">
+
+<div class="banner-wrap">
+  <img src="banner_glow_open_fix.jpg" class="banner-img">
+  <div class="banner-shine"></div>
+</div>
+
+<div class="box">
+<h2>📢 공지</h2>
+<ul class="list">
+<li>3월 1일 ~ 8일 2차 오픈</li>
+<li>디스코드 및 단톡 참여 후 접속</li>
+<li>오대기: 3월 1일 18시~20시</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>⬇️ 다운로드</h2>
+<div class="btns">
+<a class="btn" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+접속기 다운로드
+</a>
+</div>
+</div>
+
+<div class="box">
+<h2>💬 커뮤니티</h2>
+<div class="btns">
+<a class="btn" href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
+<a class="btn" href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
+<a class="btn" href="https://t.me/kitty20262026" target="_blank">Telegram</a>
+</div>
+</div>
+
+<div class="footer">© 키티서버</div>
+
+</div>
+</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function(){
+const intro = document.getElementById('intro');
+const skipBtn = document.getElementById('skipBtn');
 
-  /* 고객센터 KITTY 교체 */
-  var csWrap = document.querySelector('.cs1');
-  if(csWrap){
-    var img = csWrap.querySelector('img');
-    if(img){
-      img.src="https://i.imgur.com/4M7IWwP.png";
-      img.alt="KITTY 고객센터";
-    }
-    var txt = csWrap.querySelector('.error_1');
-    if(txt) txt.textContent="KITTY 고객센터";
-  }
+function closeIntro(){
+  intro.classList.add('fade-out');
+  setTimeout(()=>intro.remove(),400);
+}
 
-  /* 우측 SNS 버튼 생성 */
-  var box=document.createElement('div');
-  box.className='kitty-fixed';
-  box.innerHTML=`
-    <a href="https://discord.gg/ecBhq6Y9" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"> 디스코드
-    </a>
-    <a href="https://open.kakao.com/o/g7MGDzdi" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png"> 카카오톡
-    </a>
-    <a href="https://t.me/kitty20262026" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> 텔레그램
-    </a>
-    <a href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png"> 다운로드
-    </a>
-  `;
-  document.body.appendChild(box);
+skipBtn.addEventListener('click', closeIntro);
 
-});
+/* 2초 자동 종료 */
+setTimeout(closeIntro, 2000);
 </script>
-<!-- ========================= -->
+
+</body>
+</html>
