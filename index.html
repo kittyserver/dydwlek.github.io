@@ -12,13 +12,87 @@ body{
   background:#0b0f1a;
   color:#e9eefc;
 }
+
 .wrap{max-width:960px;margin:0 auto;padding:28px}
+
 .card{
   background:#121a2b;
   border:1px solid #22304f;
   border-radius:18px;
   padding:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
+
+/* ===== 배너 ===== */
+.banner-wrap{
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  margin-bottom:18px;
+  border:1px solid #22304f;
+}
+
+.banner-img{
+  width:100%;
+  display:block;
+}
+
+.banner-shine{
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform:skewX(-20deg);
+  animation:shineMove 3.5s infinite;
+  pointer-events:none;
+}
+
+@keyframes shineMove{
+  0%{ left:-40% }
+  100%{ left:140% }
+}
+
+.banner-overlay{
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.banner-overlay a{
+  padding:10px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:800;
+  border:1px solid rgba(58,79,122,.9);
+  background:rgba(15,22,38,.55);
+  color:#e9eefc;
+  backdrop-filter: blur(6px);
+}
+
+.banner-overlay a:hover{
+  transform:translateY(-1px);
+  background:rgba(27,42,68,.65);
+}
+
+.banner-overlay a.cta{
+  background:linear-gradient(135deg,#ffd86b,#ffb700);
+  color:#0b0f1a;
+  border:none;
+  box-shadow:0 6px 18px rgba(255,190,0,.35);
+}
+
+/* ===== 카드 ===== */
 .box{
   background:#0f1626;
   border:1px solid #22304f;
@@ -26,20 +100,33 @@ body{
   padding:16px;
   margin-bottom:14px;
 }
+
+h2{margin:0 0 8px}
+
+.list{margin:0;padding-left:18px}
+
 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+
 a.btn{
   padding:10px 14px;
-  border-radius:10px;
+  border-radius:12px;
   text-decoration:none;
   color:#e9eefc;
   border:1px solid #3a4f7a;
 }
-a.btn:hover{
-  background:#1b2a44;
+
+a.btn:hover{background:#1b2a44}
+
+.footer{
+  margin-top:18px;
+  color:#93a4c7;
+  font-size:12px;
 }
-h2{margin:0 0 8px}
-.list{margin:0;padding-left:18px}
-.footer{margin-top:18px;color:#93a4c7;font-size:12px}
+
+@media (max-width:520px){
+  .banner-overlay{left:12px;right:12px;bottom:10px}
+  .banner-overlay a{padding:9px 12px}
+}
 </style>
 </head>
 
@@ -47,6 +134,22 @@ h2{margin:0 0 8px}
 <div class="wrap">
 <div class="card">
 
+<!-- ===== 배너 ===== -->
+<div class="banner-wrap">
+  <img src="banner.jpg.png" class="banner-img">
+  <div class="banner-shine"></div>
+
+  <div class="banner-overlay">
+    <a class="cta" href="https://drive.google.com/file/d/1T-wStrkUTliUxCikulXoJo4ZmJS9AVVp/view" target="_blank">
+      접속기 다운로드
+    </a>
+    <a href="https://discord.gg/ecBhq6Y9" target="_blank">Discord</a>
+    <a href="https://open.kakao.com/o/g7MGDzdi" target="_blank">카카오 단톡</a>
+    <a href="https://t.me/kitty20262026" target="_blank">Telegram</a>
+  </div>
+</div>
+
+<!-- 공지 -->
 <div class="box">
 <h2>📢 공지</h2>
 <ul class="list">
@@ -56,6 +159,7 @@ h2{margin:0 0 8px}
 </ul>
 </div>
 
+<!-- 다운로드 -->
 <div class="box">
 <h2>⬇️ 다운로드</h2>
 <div class="btns">
@@ -65,6 +169,7 @@ h2{margin:0 0 8px}
 </div>
 </div>
 
+<!-- 커뮤니티 -->
 <div class="box">
 <h2>💬 커뮤니티</h2>
 <div class="btns">
